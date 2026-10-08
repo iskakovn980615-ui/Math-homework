@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6-сынып математика: бөлімдер бойынша деңгейлік есептер</title>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=PT+Sans:wght@400;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fbfaf3;--grid:#d6e4ee;--ink:#1f3fa8;--red:#c4272f;--green:#1f7a4d;--text:#1d2330;--card:#fff;--line:#c9d3dc;--muted:#566070;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#171c26;--grid:#26303f;--ink:#8fb0ff;--red:#ff8a8f;--green:#6fd1a0;--text:#e7ebf3;--card:#1f2633;--line:#3a4658;--muted:#a3adbd}}
+:root[data-theme="dark"]{--paper:#171c26;--grid:#26303f;--ink:#8fb0ff;--red:#ff8a8f;--green:#6fd1a0;--text:#e7ebf3;--card:#1f2633;--line:#3a4658;--muted:#a3adbd}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;color:var(--text);font:17px/1.55 "PT Sans",system-ui,sans-serif}
+body:not(.authed) main{display:none}#gate{display:flex;position:fixed;inset:0;z-index:20;align-items:center;justify-content:center;padding:20px;background:var(--paper)}.gbox{width:min(100%,480px);border:2px solid var(--ink);border-radius:14px;padding:24px;background:var(--card);box-shadow:0 12px 40px #1d233022}.gbox h2{margin-top:0}.gbox input,.gbox select{width:100%;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:8px;background:var(--paper);color:var(--text);margin:4px 0 12px}.gbox label{font-weight:700}.authhint{font-size:14px;color:var(--muted)}
+main{max-width:720px;margin:0 auto;padding:28px 16px 64px}
+h1{font:700 clamp(28px,6vw,40px)/1.1 "PT Serif",Georgia,serif;margin:0 0 8px}
+h2{font:700 20px/1.3 "PT Serif",Georgia,serif;margin:12px 0 4px}
+.lead{max-width:60ch;margin:0 0 18px;color:var(--muted)}
+.box{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:16px}
+label.n{display:block;font-weight:700;margin:0 0 6px}
+input[type=text],select{width:100%;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:8px;background:var(--paper);color:var(--text);margin-bottom:12px}
+input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+button,.btn{font:700 16px "PT Sans",sans-serif;padding:9px 14px;border-radius:8px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;min-height:44px;text-decoration:none;display:inline-flex;align-items:center}
+button[aria-pressed=true],button.main{background:var(--ink);color:var(--paper)}
+button:disabled{cursor:default}button.dn{border-color:var(--green);color:var(--green)}button.dn[aria-pressed=true]{background:transparent}
+.sub{font-size:14px;color:var(--muted);margin:0 0 6px}
+fieldset{border:0;padding:0;margin:0 0 18px}
+legend{font:700 18px/1.35 "PT Serif",Georgia,serif;padding:0;margin-bottom:8px}
+.opt{display:flex;gap:10px;align-items:center;padding:9px 12px;border:2px solid var(--line);border-radius:8px;margin-bottom:6px;cursor:pointer;min-height:44px}
+.opt input{width:20px;height:20px;accent-color:var(--ink)}
+.opt.ok{border-color:var(--green);background:color-mix(in srgb,var(--green) 14%,transparent)}
+.opt.no{border-color:var(--red);background:color-mix(in srgb,var(--red) 14%,transparent)}
+.hint{font:500 23px/1.3 "Caveat","Comic Sans MS",cursive;color:var(--red);margin:4px 0 0}
+.msg{font-weight:700;margin:8px 0}
+.cert{border:3px double var(--green);border-radius:10px;padding:16px;background:var(--card);margin-top:14px}
+.cert h2{color:var(--green);margin-top:0}
+.fail{border:2px solid var(--red);border-radius:10px;padding:12px 16px;margin-top:14px;background:var(--card)}
+[hidden]{display:none!important}
+textarea{width:100%;min-height:110px;font:inherit;padding:10px;border:2px solid var(--line);border-radius:8px;background:var(--paper);color:var(--text);margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:center}
+th:first-child,td:first-child{text-align:left}
+.yes{color:var(--green);font-weight:700}
+.tw{overflow-x:auto}
+.ans{width:160px;margin:0 6px 0 0}
+.okh{color:var(--green)}.bad{color:var(--red);font-weight:700}
+details{margin:6px 0}summary{cursor:pointer;font-weight:700;min-height:28px}
+
+.gbox{max-width:440px;border:2px solid var(--ink);border-radius:12px;padding:20px 24px;background:var(--paper)}.gbox h2{margin:0 0 8px}
+main.wide{max-width:1180px}
+.tbar{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin:0 0 10px}.tbar label{display:flex;flex-direction:column;font-weight:700;font-size:14px;color:var(--muted)}.tbar select,.tbar input{width:auto;min-width:150px;margin:4px 0 0;padding:7px 10px}.tbar button{padding:8px 14px}
+.tstat{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 12px}.sc{border:1px solid var(--line);border-radius:8px;padding:6px 14px;background:var(--paper);min-width:120px}.sc b{display:block;font:700 22px "PT Serif",Georgia,serif;color:var(--ink)}.sc span{font-size:13px;color:var(--muted)}
+.rt{border-collapse:separate;border-spacing:0;font-size:15px;min-width:100%}.rt th,.rt td{border-bottom:1px solid var(--line);padding:6px 9px;text-align:center;white-space:nowrap}.rt th{background:var(--card);position:sticky;top:0;color:var(--ink);font-size:13px}
+.rt th:first-child,.rt td:first-child{position:sticky;left:0;background:var(--card);text-align:left;z-index:1;border-right:1px solid var(--line)}.rt td:first-child button{all:unset;cursor:pointer;color:var(--ink);font-weight:700;text-decoration:underline dotted}.rt td:first-child button:focus-visible{outline:3px solid var(--red)}
+.rt td.g{background:rgba(31,122,77,.2)}.rt td.y{background:rgba(214,158,0,.25)}.rt td.r{background:rgba(196,39,47,.2)}.rt td.cl{cursor:pointer}.rt tr.sel td{outline:2px solid var(--ink);outline-offset:-2px}
+.lv{display:inline-block;width:19px;height:19px;line-height:19px;border-radius:4px;font-size:12px;font-weight:700;margin:0 1px;background:var(--line);color:var(--muted)}.lv.g{background:var(--green);color:#fff}.lv.y{background:#d69e00;color:#fff}.lv.r{background:var(--red);color:var(--paper)}
+#hard{margin:12px 0}#hard h3,#tdet h3{margin:8px 0 4px;font:700 16px "PT Serif",Georgia,serif}.hl{display:flex;gap:8px;flex-wrap:wrap}.hl span{border:1px solid var(--line);border-radius:6px;padding:3px 10px;background:var(--paper);font-size:14px}.hl b{color:var(--red)}
+#tdet details{border:1px solid var(--line);border-radius:6px;margin:6px 0;padding:4px 10px;background:var(--paper)}#tdet summary{cursor:pointer;font-weight:700}#tdet summary.g{color:var(--green)}#tdet summary.r{color:var(--red)}
+.dt{border-collapse:collapse;width:100%;font-size:14px;margin:6px 0}.dt th,.dt td{border-bottom:1px solid var(--line);padding:4px 8px;text-align:left}.dt td.dg{color:var(--green);font-weight:700}.dt td.dr{color:var(--red);font-weight:700}
+.exq{font:700 19px/1.4 "PT Serif",Georgia,serif;margin:6px 0 4px}
+.tag{display:inline-block;font:700 12px "PT Sans",sans-serif;text-transform:uppercase;letter-spacing:.05em;background:var(--ink);color:var(--paper);border-radius:4px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+.exst{margin:8px 0}.stp{display:flex;gap:10px;align-items:flex-start;margin:7px 0}
+.no{flex:0 0 26px;height:26px;border-radius:50%;background:var(--ink);color:var(--paper);font:700 14px/26px "PT Sans",sans-serif;text-align:center}
+.exa{margin:10px 0 4px;padding:7px 12px;border:2px solid var(--green);border-radius:8px;color:var(--green);font-weight:700;display:inline-block}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 5px;line-height:1.2;font-weight:600}.fr>i{font-style:normal;padding:0 5px}.fr>i:first-child{border-bottom:2px solid currentColor}.bigfr{font-size:28px;text-align:center;margin:10px 0;color:var(--ink)}
+.cs{font-weight:700;color:var(--red);margin:12px 0 2px}.ex2{border-top:1px dashed var(--line);margin-top:14px;padding-top:4px}
+.fig{display:block;width:100%;max-width:440px;height:auto;margin:8px auto}fieldset .fig{max-width:380px;margin:4px 0 12px}
+.sys{display:inline-flex;align-items:stretch;gap:6px;margin:4px 8px;vertical-align:middle;font-weight:400}
+.brs{width:12px;height:auto;align-self:stretch}.brs path{fill:none;stroke:var(--text);stroke-width:2;vector-effect:non-scaling-stroke}
+.eqs{display:flex;flex-direction:column;justify-content:center;gap:2px;font-size:19px}
+.add{border-collapse:collapse;margin:6px 0 6px 10px;font-size:20px}.add td{padding:2px 9px;text-align:center;white-space:nowrap}
+.add td:first-child{color:var(--red);font-weight:700}.add tr.sum td{border-top:2px solid var(--text);color:var(--ink);font-weight:700}
+.vt{border-collapse:collapse;margin:8px auto}.vt th,.vt td{border:1px solid var(--line);padding:5px 14px;text-align:center}.vt th{background:var(--card);color:var(--ink)}
+.ax{stroke:var(--text);stroke-width:1.6;fill:none}.gd{stroke:var(--line);stroke-width:1}.bl{stroke:var(--ink);stroke-width:3}
+.rd{stroke:var(--red);stroke-width:2.5}.gr{stroke:var(--green);stroke-width:2.5}.sg{stroke:var(--ink);stroke-width:6;opacity:.85}
+.ar{stroke:var(--red);stroke-width:2;fill:none}.mk{fill:var(--red)}.mk2{fill:var(--text)}
+.op{fill:var(--paper);stroke:var(--ink);stroke-width:3}.cl{fill:var(--ink)}.dr{fill:var(--red)}.pg{fill:var(--ink);fill-opacity:.1}
+.b1{fill:#2b4c7e}.b2{fill:#c0504d}.b3{fill:#2f7d4b}.wt{fill:var(--ink);fill-opacity:.1}
+text.t{fill:var(--text);font:700 14px "PT Sans",sans-serif;text-anchor:middle}
+text.t.tb{fill:var(--ink)}text.t.tr{fill:var(--red)}text.t.tl{text-anchor:start}text.t.te{text-anchor:end}text.t.tj{fill:#fff}
+#ex{background:var(--paper);border:1px dashed var(--ink);border-radius:8px;padding:8px 12px;margin-bottom:14px}
+.exs{font:500 23px/1.3 "Caveat","Comic Sans MS",cursive;color:var(--ink);margin:0}
+#tlist details{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div id="gate"><div class="gbox"><h2>6-сынып математика</h2><div id="setupTeacher" hidden><p>Алдымен мұғалім аккаунтын жасаңыз.</p><label for="newTeacherLogin">Мұғалім логині</label><input id="newTeacherLogin" autocomplete="username" placeholder="Мысалы: ustaz"><label for="newTeacherPass">Құпиясөз</label><input id="newTeacherPass" type="password" autocomplete="new-password"><button class="main" id="createTeacher" type="button">Мұғалім аккаунтын жасау</button></div><div id="signIn"><label for="loginRole">Кіру түрі</label><select id="loginRole"><option value="student">Оқушы</option><option value="teacher">Мұғалім</option></select><label for="loginName">Логин</label><input id="loginName" autocomplete="username"><label for="loginPass">Құпиясөз</label><input id="loginPass" type="password" autocomplete="current-password"><button class="main" id="signInBtn" type="button">Кіру</button></div><p id="authMsg" class="msg" role="status" aria-live="polite"></p><p class="authhint">Оқушы аккаунтын мұғалім тіркейді.</p></div></div>
+<main>
+<div class="row" style="justify-content:flex-end"><button id="logout" type="button">Шығу</button></div>
+<h1>6-сынып математика: бөлімдер бойынша деңгейлік есептер</h1>
+<p class="lead">Тарау мен бөлімді таңда. Бөлім үш деңгеймен ретімен өтеді: Базалық → Орта → Жоғары. Әр деңгейде 5 есеп бар. Нәтижелер осы браузерде сақталады. Мұғалім бөлімі осы құрылғыда сақталған аяқталған жұмыстарды көрсетеді.</p>
+<div class="row"><button type="button" id="ts" aria-pressed="true">Оқушы</button><button type="button" id="tt" aria-pressed="false" hidden>Мұғалім</button></div>
+<div id="stu">
+<div class="box">
+<label class="n" for="name">Аты-жөнің</label>
+<input type="text" id="name" autocomplete="name" placeholder="Мысалы: Айбек Сәрсенов">
+<p class="sub" id="dbs">Нәтижелер осы құрылғыда сақталады.</p>
+<div id="pick">
+<label class="n" for="ch">Тарау</label>
+<select id="ch"></select>
+<label class="n" for="sec">Бөлім</label>
+<select id="sec"></select>
+<p class="sub">Деңгей</p>
+<div class="row" id="lv"></div>
+</div>
+<h2 id="title"></h2>
+<details id="ex" open><summary>Үлгі есеп және шешу жолы</summary><div id="exb"></div></details>
+<form id="quiz" onsubmit="return false" style="margin-top:12px"></form>
+<div class="row"><button class="main" id="check" type="button">Тексеру</button><button id="renew" type="button" hidden>Бөлімді қайта бастау</button></div>
+<p class="msg" id="info" role="status" aria-live="polite"></p>
+<div class="row"><button type="button" id="gofix" class="main" hidden>Қателермен жұмысқа өту</button></div>
+
+<div class="cert" id="cert" hidden>
+<h2>Құттықтаймыз, бөлімді аяқтадың!</h2>
+<p id="certText" style="margin:6px 0"></p>
+<p class="sub">Мұғалімге жіберу үшін төмендегі мәтінді көшір немесе мессенджер арқылы жібер.</p>
+<textarea id="share" readonly aria-label="Мұғалімге жіберілетін хабарлама"></textarea>
+<div class="row"><button type="button" id="copy">Мәтінді көшіру</button><a class="btn" id="wa" target="_blank" rel="noopener">WhatsApp арқылы жіберу</a></div>
+<p class="sub" id="sent"></p>
+</div>
+</div>
+
+<div class="box"><details><summary>Мұғалімге код (кестеге автоматты түспесе)</summary><p class="sub">Кодты көшіріп, мұғалімге жібер. Мұғалім оны өз бетіне қосады.</p><textarea id="code" readonly aria-label="Мұғалімге код"></textarea><button type="button" id="cc">Кодты көшіру</button></details></div>
+<div class="box">
+<h2 style="margin-top:0" id="mt"></h2>
+<div class="tw"><table id="map"></table></div>
+</div>
+</div>
+<div id="tch" hidden><div class="box">
+<h2 style="margin-top:0">Оқушылардың нәтижелері</h2>
+<details class="box" open><summary>Оқушы тіркеу</summary><p class="sub">Оқушыға аты-жөні, сыныбы, логині мен бастапқы құпиясөзін беріңіз.</p><label class="n" for="studentFullName">Аты-жөні</label><input type="text" id="studentFullName" placeholder="Мысалы: Айбек Сәрсенов"><label class="n" for="studentClass">Сыныбы</label><input type="text" id="studentClass" placeholder="6А"><label class="n" for="studentLogin">Оқушы логині</label><input type="text" id="studentLogin" autocomplete="off"><label class="n" for="studentPass">Бастапқы құпиясөз</label><input type="password" id="studentPass" autocomplete="new-password"><div class="row"><button class="main" id="registerStudent" type="button">Оқушыны тіркеу</button></div><p id="rosterMsg" class="sub" role="status"></p><div id="roster"></div></details>
+<div class="tbar"><label>Тарау<select id="tc" aria-label="Тарау"></select></label><label>Бөлім<select id="tsx" aria-label="Бөлім"></select></label><label>Іздеу<input type="text" id="tq" placeholder="Оқушының аты" aria-label="Оқушыны іздеу"></label><label>Реті<select id="tso" aria-label="Реттеу"><option value="n">Аты бойынша</option><option value="a">Көмек керек оқушылар алдымен</option></select></label><button type="button" id="tcopy">Excel-ге көшіру</button></div>
+<p class="sub" id="tinfo"></p><p class="sub">Оқушының нақты жауаптарын көру үшін кестедегі аты-жөнін басыңыз.</p><div class="tstat" id="tstat"></div>
+<div class="tw"><table class="rt" id="rt"></table></div>
+<div id="hard"></div><div id="tdet"></div>
+</div></div>
+</main>
+<script>
+const LV=["Базалық","Орта","Жоғары"];
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),A=(...a)=>a[R(0,a.length-1)];
+const F=x=>(+(+x).toFixed(2)).toString().replace(".",",").replace("-","−");
+const S=n=>n<0?"− "+(-n):"+ "+n;
+const dg=(a,b)=>{let r=a%b,s=[],m={};while(r&&m[r]===undefined){m[r]=s.length;r*=10;s.push(Math.floor(r/b));r%=b}return r?[s.slice(0,m[r]),s.slice(m[r])]:[s,[]]};
+const C=[
+{n:"I тарау. Қатынас және пропорция",s:[
+["1.1. Қатынас",l=>{let b=R(2,9)+3*l,m=R(2,9)+2*l,a=b*m;return[`${a} санының ${b} санына қатынасын тап.`,m,"",`${a} : ${b} = ${m}`]}],
+["1.2. Берілген қатынаста бөлу",l=>{let p=R(1,4)+l,q=p+R(1,3),k=R(2,9)*(l+1),t=(p+q)*k;return[`${t} санын ${p} : ${q} қатынасында бөл. Үлкен бөлігін тап.`,q*k,"",`${t} : (${p} + ${q}) = ${k}; ${k} · ${q} = ${q*k}`]}],
+["1.3. Екі санның проценттік қатынасы",l=>{let p=A(10,20,25,40,50,60,75,80),b=20*R(1,8)*(l+1),a=b*p/100;if(l<2)return[`${a} саны ${b} санының неше пайызы?`,p,"%",`${a} : ${b} · 100% = ${p}%`];a=b*(100+p)/100;return[`${a} саны ${b} санынан неше пайызға артық?`,p,"%",`(${a} − ${b}) : ${b} · 100% = ${p}%`]}],
+["1.4. Пропорция. Негізгі қасиеті",l=>{let a=R(2,9),m=R(2,9)+l,c=R(2,9)+l,b=m*c;if(l<2)return[`x : ${a} = ${b} : ${c} пропорциясынан x-ті тап.`,a*m,"",`x · ${c} = ${a} · ${b}; x = ${a*b} : ${c} = ${a*m}`];return[`Пропорцияның орта мүшелерінің көбейтіндісі ${a*b*c}, шеткі мүшелерінің бірі ${a*c}. Екінші шеткі мүшені тап.`,b,"",`${a*b*c} : ${a*c} = ${b}`]}],
+["1.5. Тура пропорционал тәуелділік",l=>{let a=R(2,9),u=R(2,9)*10*(l+1),b=a+R(1,5)+l;return[`${a} кг алма ${a*u} теңге тұрады. ${b} кг алма неше теңге?`,b*u,"теңге",`1 кг = ${a*u} : ${a} = ${u} теңге; ${u} · ${b} = ${b*u}`]}],
+["1.6. Кері пропорционал тәуелділік",l=>{let w=R(2,9),v=w+R(1,5),k=R(2,6)+l;return[`${w} жұмысшы жұмысты ${v*k} күнде орындайды. ${v} жұмысшы неше күнде орындайды?`,w*k,"күн",`${w} · ${v*k} = ${w*v*k}; ${w*v*k} : ${v} = ${w*k}`]}],
+["1.7. І. Пропорциямен санның процентін табу",l=>{let N=20*R(2,10)*(l+1),p=A(5,10,15,25,30,40,60,75),x=N*p/100;return[`Пропорция құрып, ${N} санының ${p}%-ын тап.`,x,"",`${N} — 100%, x — ${p}%; x = ${N} · ${p} : 100 = ${x}`]}],
+["1.7. ІІ. Пропорциямен проценті бойынша санды табу",l=>{let N=20*R(2,10)*(l+1),p=A(5,10,15,25,30,40,60,75),x=N*p/100;return[`Санның ${p}%-ы ${x} болса, пропорция құрып, сол санды тап.`,N,"",`x — 100%, ${x} — ${p}%; x = ${x} · 100 : ${p} = ${N}`]}],
+["1.7. ІІІ. Пропорциямен проценттік қатынасын табу",l=>{let b=A(20,25,40,50,100,200),a=R(1,b-1),v=a*100/b;return[`${a} саны ${b} санының неше пайызын құрайды? Пропорция құр.`,v,"%",`${b} — 100%, ${a} — x%; x = ${a} · 100 : ${b} = ${F(v)}`]}],
+["1.8. Масштаб",l=>{let s=A(1000,2000,5000,10000),d=R(2,9)+l*3,m=d*s/100;if(l==0)return[`Масштаб 1 : ${s}. Картада ${d} см болса, нақты қашықтық неше метр?`,m,"м",`${d} · ${s} = ${d*s} см = ${m} м`];return[`Масштаб 1 : ${s}. Жерде ${m} м болса, картада неше сантиметр?`,d,"см",`${m} м = ${m*100} см; ${m*100} : ${s} = ${d}`]}],
+["1.9. Шеңбер ұзындығы. Дөңгелек ауданы",l=>{let r=R(2,9)+l*3;if(l==0)return[`Радиусы ${r} см шеңбердің ұзындығын тап (π ≈ 3,14).`,6.28*r,"см",`C = 2πr = 2 · 3,14 · ${r} = ${F(6.28*r)}`];if(l==1)return[`Радиусы ${r} см дөңгелектің ауданын тап (π ≈ 3,14).`,3.14*r*r,"см²",`S = πr² = 3,14 · ${r*r} = ${F(3.14*r*r)}`];return[`Шеңбердің ұзындығы ${F(6.28*r)} см. Дөңгелектің ауданын тап (π ≈ 3,14).`,3.14*r*r,"см²",`r = ${F(6.28*r)} : 6,28 = ${r}; S = 3,14 · ${r*r} = ${F(3.14*r*r)}`]}]
+]},
+{n:"II тарау. Рационал сандар және оларға амалдар қолдану",s:[
+["2.1. Оң және теріс сандар",l=>{let a=R(2,9)+l*3,b=a+R(1,9)+l*3,c=R(1,5)+l*2;return[[`Таңертең температура −${a} °C болды, күндіз ${b} градусқа көтерілді. Күндізгі температура қанша?`,b-a,"°C",`−${a} + ${b} = ${b-a}`],[`Температура ${a} °C еді, түнде ${b} градусқа төмендеді. Түнгі температура қанша?`,a-b,"°C",`${a} − ${b} = ${a-b}`],[`Таңертең −${a} °C болды, күндіз ${b} градусқа көтерілді, кешке ${c} градусқа төмендеді. Кешкі температура қанша?`,b-a-c,"°C",`−${a} + ${b} − ${c} = ${b-a-c}`]][l]}],
+["2.2. Координаталық түзу. Қарама-қарсы сандар",l=>{let a=R(2,9)+l*5;return[[`−${a} санына қарама-қарсы санды тап.`,a,"",`Қарама-қарсы сандар таңбасымен ерекшеленеді: ${a}`],[`−(−${a}) өрнегінің мәнін тап.`,a,"",`Қарама-қарсы санға қарама-қарсы сан өзіне тең: ${a}`],[`−${a} және ${a} нүктелерінің O(0) нүктесінен қашықтықтарының қосындысын тап.`,2*a,"",`${a} + ${a} = ${2*a}`]][l]}],
+["2.3. Бүтін сандар. Рационал сандар",l=>{let a=R(2,9)+l*2,b=R(2,9)+l*2;if(l==0)return[`−${a} мен ${b} арасындағы бүтін сандар (шеткілерін қоса) қанша?`,a+b+1,"",`${a} + 1 + ${b} = ${a+b+1}`];if(l==1)return[`−${a} мен ${b} арасындағы бүтін сандар (шеткілерін қоспағанда) қанша?`,a+b-1,"",`${a+b+1} − 2 = ${a+b-1}`];let e=a+R(1,4),s=0;for(let i=-a;i<=e;i++)s+=i;return[`−${a} ≤ x ≤ ${e} теңсіздігін қанағаттандыратын бүтін x-тердің қосындысын тап.`,s,"",`Қарама-қарсы сандар жұбы 0 береді, қалғанының қосындысы ${s}`]}],
+["2.4. Санның модулі",l=>{let a=R(2,9)+l*2,b=R(2,9)+l*2,c=R(2,9);return[[`|−${a}| + |${b}| өрнегінің мәнін тап.`,a+b,"",`${a} + ${b} = ${a+b}`],[`|−${a}| · |−${b}| − |${c}| өрнегінің мәнін тап.`,a*b-c,"",`${a} · ${b} − ${c} = ${a*b-c}`],[`|x − ${b}| = ${a} теңдеуінің үлкен түбірін тап.`,b+a,"",`x − ${b} = ${a} немесе x − ${b} = −${a}; үлкені ${b+a}`]][l]}],
+["2.5. Рационал сандарды салыстыру",l=>{let a=R(2,9),b=R(2,9)+l,c=R(2,9)+3;if(l==0)return[`−${a}; ${b}; −${c}; 0 сандарының ең кішісін тап.`,-Math.max(a,c),"",`Теріс сандардың ішінде модулі үлкені кіші: −${Math.max(a,c)}`];if(l==1)return[`−${a}; −${b}; −${c} сандарының ең үлкенін тап.`,-Math.min(a,b,c),"",`Модулі ең кіші теріс сан ең үлкен: −${Math.min(a,b,c)}`];let p=R(1,5),q=p+R(2,6);return[`−${q} < x < −${p} теңсіздігін қанағаттандыратын бүтін x-тердің санын тап.`,q-p-1,"",`${q} − ${p} − 1 = ${q-p-1}`]}],
+["2.6. Өзендегі қозғалыс (қосымша)",l=>{let v=R(8,20)+l*5,w=R(1,5),t=R(2,5);return[[`Қайықтың тынық судағы жылдамдығы ${v} км/сағ, ағыс жылдамдығы ${w} км/сағ. Қайықтың ағыспен жылдамдығын тап.`,v+w,"км/сағ",`${v} + ${w} = ${v+w}`],[`Қайықтың өз жылдамдығы ${v} км/сағ, ағыс ${w} км/сағ. Қайық ағысқа қарсы ${t} сағатта қанша км жүзеді?`,(v-w)*t,"км",`(${v} − ${w}) · ${t} = ${(v-w)*t}`],[`Қайық ағыспен ${(v+w)*t} км қашықтықты неше сағатта жүзеді? Өз жылдамдығы ${v} км/сағ, ағыс ${w} км/сағ.`,t,"сағ",`${(v+w)*t} : (${v} + ${w}) = ${t}`]][l]}],
+["2.7. Қосу: координаталық түзу",l=>{let a=R(2,9),b=a+R(1,5)+l,c=R(1,5)+l;return[[`Координаталық түзуде −${a} нүктесінен оңға ${b} бірлік жүрді. Жаңа координатаны тап.`,b-a,"",`−${a} + ${b} = ${b-a}`],[`${a} нүктесінен солға ${b} бірлік жүрді. Жаңа координатаны тап.`,a-b,"",`${a} − ${b} = ${a-b}`],[`−${a} нүктесінен оңға ${b}, сосын солға ${c} бірлік жүрді. Жаңа координатаны тап.`,b-a-c,"",`−${a} + ${b} − ${c} = ${b-a-c}`]][l]}],
+["2.8. Теріс сандарды қосу",l=>{let a=R(2,9),b=R(2,9),c=R(2,9),x=R(1,9)+.5,y=R(1,9)+.5;return[[`(−${a}) + (−${b}) өрнегінің мәнін тап.`,-a-b,"",`Модульдерін қосып, "−" қоямыз: −${a+b}`],[`(−${a}) + (−${b}) + (−${c}) өрнегінің мәнін тап.`,-a-b-c,"",`−(${a} + ${b} + ${c}) = −${a+b+c}`],[`(−${F(x)}) + (−${F(y)}) өрнегінің мәнін тап.`,-x-y,"",`−(${F(x)} + ${F(y)}) = −${F(x+y)}`]][l]}],
+["2.9. Таңбалары әртүрлі сандарды қосу",l=>{let a=R(2,9),b=R(2,9),x=R(20,99),y=R(20,99),p=R(11,99)/10,r=R(11,99)/10;return[[`−${a} + ${b} өрнегінің мәнін тап.`,b-a,"",`Модульдерін азайтамыз, таңбасы модулі үлкен санның таңбасындай: ${b-a}`],[`${x} + (−${y}) өрнегінің мәнін тап.`,x-y,"",`${x} − ${y} = ${x-y}`],[`−${F(p)} + ${F(r)} өрнегінің мәнін тап.`,r-p,"",`${F(r)} − ${F(p)} = ${F(r-p)}`]][l]}],
+["2.10. Қосудың қасиеттері",l=>{let a=R(2,9),b=R(2,9),c=R(2,9),d=R(2,9);return[[`Қолайлы тәсілмен есепте: −${a} + ${b} + ${a} − ${c}.`,b-c,"",`−${a} және ${a} қарама-қарсы, олар 0 береді: ${b} − ${c} = ${b-c}`],[`Қолайлы тәсілмен есепте: −${a} − ${b} + ${c} + ${a} + ${b}.`,c,"",`Қарама-қарсы сандар жұптары жойылады: ${c}`],[`Қолайлы тәсілмен есепте: −${a} − ${b} + ${a} − ${c} + ${b} + ${d}.`,d-c,"",`Жұптары жойылады, қалғаны −${c} + ${d} = ${d-c}`]][l]}],
+["2.11. Рационал сандарды азайту",l=>{let a=R(2,9),b=a+R(1,8),c=R(2,9);return[[`${a} − ${b} өрнегінің мәнін тап.`,a-b,"",`${a} − ${b} = ${a-b}`],[`−${a} − (−${b}) өрнегінің мәнін тап.`,b-a,"",`−${a} + ${b} = ${b-a}`],[`−${a} − ${c} − (−${b}) өрнегінің мәнін тап.`,b-a-c,"",`−${a} − ${c} + ${b} = ${b-a-c}`]][l]}],
+["2.12. Екі нүктенің арақашықтығы",l=>{let a=R(2,9)+l,b=R(1,a-1),n=R(2,9)+l*3,e=R(2,9);return[[`A(−${a}) және B(${e}) нүктелерінің арақашықтығын тап.`,a+e,"",`|${e} − (−${a})| = ${a} + ${e} = ${a+e}`],[`A(−${a}) және B(−${b}) нүктелерінің арақашықтығын тап.`,a-b,"",`|−${b} − (−${a})| = ${a-b}`],[`A(−${a}) нүктесінен оң жақта ${n} бірлік қашықтықта B нүктесі орналасқан. B координатасын тап.`,n-a,"",`−${a} + ${n} = ${n-a}`]][l]}],
+["2.13. Рационал сандарды көбейту",l=>{let a=R(2,9),b=R(2,9),c=R(2,9);return[[`(−${a}) · ${b} өрнегінің мәнін тап.`,-a*b,"",`Таңбалары әртүрлі: нәтиже теріс, ${a} · ${b} = ${a*b}`],[`(−${a}) · (−${b}) өрнегінің мәнін тап.`,a*b,"",`Таңбалары бірдей: нәтиже оң, ${a*b}`],[`(−${a}) · (−${b}) · (−${c}) өрнегінің мәнін тап.`,-a*b*c,"",`Үш теріс көбейткіш: нәтиже теріс, ${a*b*c}`]][l]}],
+["2.14. Көбейтудің ауыстырымдылық, терімділік қасиеттері",l=>{let p=A([25,4],[20,5],[50,2],[125,8]),b=R(3,19);return[[`Қолайлы тәсілмен есепте: (−${p[0]}) · ${b} · ${p[1]}.`,-p[0]*p[1]*b,"",`(−${p[0]} · ${p[1]}) · ${b} = −${p[0]*p[1]} · ${b} = ${-p[0]*p[1]*b}`],[`Қолайлы тәсілмен есепте: (−${p[0]}) · (−${b}) · (−${p[1]}).`,-p[0]*p[1]*b,"",`${p[0]} · ${p[1]} = ${p[0]*p[1]}; үш теріс көбейткіш → теріс: ${-p[0]*p[1]*b}`],[`Қолайлы тәсілмен есепте: (−${p[0]}) · ${b} · (−${p[1]}) · (−2).`,-p[0]*p[1]*b*2,"",`${p[0]} · ${p[1]} = ${p[0]*p[1]}; үш теріс көбейткіш → теріс: ${-p[0]*p[1]*b*2}`]][l]}],
+["2.15. Рационал сандарды бөлу",l=>{let d=R(2,9),m=R(2,9)+l*3,k=R(2,6);return[[`(−${d*m}) : ${d} өрнегінің мәнін тап.`,-m,"",`Таңбалары әртүрлі → теріс: −${m}`],[`(−${d*m}) : (−${d}) өрнегінің мәнін тап.`,m,"",`Таңбалары бірдей → оң: ${m}`],[`(−${d*m}) : ${d} · (−${k}) өрнегінің мәнін тап.`,m*k,"",`(−${m}) · (−${k}) = ${m*k}`]][l]}],
+["2.16. Проценттерге күрделі есептер (қосымша)",l=>{let k=R(2,9),N=100*k,p=A(10,20,25,50),q=A([20,25],[50,40],[10,50],[25,20],[40,25]);if(l==0)return[`Тауардың бағасы ${N} теңге. Ол ${p}%-ға қымбаттады. Жаңа баға қанша?`,N*(100+p)/100,"теңге",`${N} · ${100+p} : 100 = ${N*(100+p)/100}`];if(l==1)return[`${N} теңгелік тауар ${q[0]}%-ға қымбаттап, сосын ${q[1]}%-ға арзандады. Соңғы баға қанша?`,N*(100+q[0])*(100-q[1])/10000,"теңге",`${N} · ${100+q[0]}% · ${100-q[1]}% = ${N*(100+q[0])*(100-q[1])/10000}`];let ch=(100+q[0])*(100-q[1])/100-100;return[`Тауар бағасы ${q[0]}%-ға өсті, сосын ${q[1]}%-ға төмендеді. Бастапқы бағамен салыстырғанда баға неше пайызға өзгерді? (Өссе — оң, төмендесе — теріс таңбамен.)`,ch,"%",`Бастапқы баға 100% болса: 100 · ${100+q[0]}% = ${100+q[0]}; ${100+q[0]} · ${100-q[1]}% = ${F(ch+100)}; өзгеріс ${F(ch)}%`]}],
+["2.17. Периодты ондық бөлшек түрінде жазу",l=>{let a,b,r;do{b=l==0?A(3,9):l==1?A(11,33):A(6,7,12,14,15);a=R(1,b-1);r=dg(a,b)}while(!r[1].length);let s=r[1].reduce((x,y)=>x+y,0);return[`${a}/${b} жай бөлшегін ондық бөлшекке айналдыр. Периодындағы цифрлардың қосындысын тап.`,s,"",`${a} : ${b} = 0,${r[0].join("")}(${r[1].join("")}); ${r[1].join(" + ")} = ${s}`]}],
+["2.18. Периодты ондық бөлшекті жай бөлшекке айналдыру",l=>{let a=R(1,9),b=R(1,9),ab=R(10,98);return[[`0,(${a}) = x/9 болса, x-ті тап.`,a,"",`Период бір цифрдан: бөлімі 9, алымы ${a}`],[`0,(${ab}) = x/99 болса, x-ті тап.`,ab,"",`Период екі цифрдан: бөлімі 99, алымы ${ab}`],[`${a},(${b}) = x/9 болса, x-ті тап.`,a*9+b,"",`${a},(${b}) = ${a} + ${b}/9 = ${a*9+b}/9`]][l]}]
+]},
+{n:"III тарау. Алгебралық өрнектер",s:[
+["3.1. Алгебралық өрнектер. Айнымалы",l=>{let m=R(2,9),n=R(2,9),x=R(2,9),y=R(2,9);return[[`a = ${x} болғанда ${m}a + ${n} өрнегінің мәнін тап.`,m*x+n,"",`${m} · ${x} + ${n} = ${m*x+n}`],[`a = ${x}, b = ${y} болғанда ${m}a − ${n}b өрнегінің мәнін тап.`,m*x-n*y,"",`${m} · ${x} − ${n} · ${y} = ${m*x-n*y}`],[`a = −${x}, b = ${y} болғанда ${m}a + ${n}b өрнегінің мәнін тап.`,-m*x+n*y,"",`${m} · (−${x}) + ${n} · ${y} = ${-m*x+n*y}`]][l]}],
+["3.2. Жақшаларды ашу. Коэффициент",l=>{let k=R(2,9),m=R(2,9),n=R(2,9),a=R(2,5);return[[`${k}(x + ${m}) өрнегіндегі жақшаны ашқанда бос мүшесі неге тең?`,k*m,"",`${k}x + ${k*m}`],[`${k}(${a}x − ${m}) өрнегіндегі жақшаны ашқанда x-тің коэффициенті неге тең?`,k*a,"",`${k*a}x − ${k*m}`],[`${k}(x + ${m}) − (x − ${n}) өрнегін ықшамда. Бос мүшесі неге тең?`,k*m+n,"",`${k}x + ${k*m} − x + ${n} = ${k-1}x + ${k*m+n}`]][l]}],
+["3.3. Ұқсас қосылғыштар",l=>{let a=R(2,9),b=R(2,9),c=R(2,9),d=R(2,9);return[[`${a}x + ${b}x − ${c}x өрнегін ықшамдағанда x-тің коэффициенті неге тең?`,a+b-c,"",`${a} + ${b} − ${c} = ${a+b-c}`],[`${a}x + ${b} + ${c}x − ${d} өрнегін ықшамдап, x = 2 болғандағы мәнін тап.`,(a+c)*2+b-d,"",`${a+c}x + ${b-d}; ${a+c} · 2 + ${b-d} = ${(a+c)*2+b-d}`],[`${a}x − ${b} − ${c}x + ${d} өрнегін ықшамдап, x = 3 болғандағы мәнін тап.`,(a-c)*3-b+d,"",`${a-c}x ${S(d-b)}; ${a-c} · 3 ${S(d-b)} = ${(a-c)*3-b+d}`]][l]}],
+["3.4. Теңбе-теңдіктер. Түрлендірулер",l=>{let k=R(2,9),m=R(2,9),c=R(1,k-1)||1,d=R(2,9);return[[`${k}(x + ${m}) = ${k}x + □ теңбе-теңдігіндегі □ орнына қандай сан қою керек?`,k*m,"",`${k} · ${m} = ${k*m}`],[`${k}(x − ${m}) = ${k}x − □ теңбе-теңдігіндегі □ орнына қандай сан қою керек?`,k*m,"",`${k} · ${m} = ${k*m}`],[`${k}(x + ${m}) − ${c}(x + ${d}) = ${k-c}x + □ теңбе-теңдігіндегі □ орнына қандай сан қою керек?`,k*m-c*d,"",`${k*m} − ${c*d} = ${k*m-c*d}`]][l]}],
+["III тарауды қайталау: теңдеулер",l=>{let x=R(2,9),a=R(2,9),b=R(2,9),k=R(2,5),m=R(1,5);if(l==0)return[`x + ${a} = ${x+a} теңдеуін шеш.`,x,"",`x = ${x+a} − ${a} = ${x}`];if(l==1)return[`${a}x − ${b} = ${a*x-b} теңдеуін шеш.`,x,"",`${a}x = ${a*x} ; x = ${x}`];let n=k*(x-m)-x;return[`${k}(x − ${m}) = x ${S(n)} теңдеуін шеш.`,x,"",`${k}x − ${k*m} = x ${S(n)}; ${k-1}x = ${n+k*m}; x = ${x}`]}],
+["3.5. Сатылы бөлшектер (қосымша)",l=>{let b=R(2,9),c=R(2,5),m=R(2,9),n=R(2,9),k=R(2,9),a=R(2,9);return[[`(${c*m}/${b}) : (${c}/${b}) өрнегінің мәнін тап.`,m,"",`${c*m}/${b} · ${b}/${c} = ${m}`],[`${n} : (1/${k}) өрнегінің мәнін тап.`,n*k,"",`${n} · ${k} = ${n*k}`],[`(${a}/${b}) : (${a}/${b*m}) өрнегінің мәнін тап.`,m,"",`${a}/${b} · ${b*m}/${a} = ${m}`]][l]}]
+]},
+{n:"IV тарау. Бір айнымалысы бар сызықтық теңдеулер",s:[
+["4.1. Санды теңдіктер. Тура санды теңдіктердің қасиеттері",d=>{let b=R(2,9)+d,m=R(2,9),k=R(2,9)+d,p=b*m;if(d==0)return[`${b} · ${m} = ${p} теңдігінің екі жағына да ${k} санын қосты. Оң жағы неше болады?`,p+k,"",`${p} + ${k} = ${p+k}`];if(d==2)return[`${b} · ${m} = ${p} теңдігінің екі жағын да −${k} санына көбейтті. Оң жағы неше болады?`,-p*k,"",`${p} · (−${k}) = ${F(-p*k)}`];return[`${b} · ${m} = ${p} теңдігінің екі жағынан ${k} санын азайтып, нәтижені 2-ге көбейтті. Оң жағы неше болады?`,2*(p-k),"",`2 · (${p} − ${k}) = ${2*(p-k)}`]}],
+["4.2. Бір айнымалысы бар сызықтық теңдеулер. Мәндес теңдеулер",d=>{let a=R(2,5)+d,x=R(-6,9),b=R(1,9)+d;if(d<2)return[`${a}x ${S(b)} = ${F(a*x+b)} теңдеуін шеш.`,x,"",`${a}x = ${F(a*x)}; x = ${F(x)}`];let c=R(1,a-1),e=(a-c)*x+b;return[`${a}x ${S(b)} = ${c}x ${S(e)} теңдеуін шеш.`,x,"",`${a-c}x = ${F(e-b)}; x = ${F(x)}`]}],
+["4.2. Теңдеу құру және түбірін табу (өзіндік жұмыс)",d=>{if(d==0){let y=R(3,15),a=R(2,5),b=R(1,9);return[`Санның ${a} еселенгеніне ${b} қосқанда ${a*y+b} шықты. Санды тап.`,y,"",`${a}x + ${b} = ${a*y+b}; x = ${y}`]}if(d==2){let y=R(3,20),k=R(2,9);return[`Екі санның қосындысы ${2*y+k}, біреуі екіншісінен ${k}-ға артық. Үлкен санды тап.`,y+k,"",`x + (x + ${k}) = ${2*y+k}; 2x = ${2*y}; x = ${y}; үлкені ${y+k}`]}let y=R(8,14),n=A(2,3,4);return[`Әкенің жасы ұлының жасынан ${n} есе үлкен, екеуінің жасының қосындысы ${(n+1)*y}. Әкенің жасын тап.`,n*y,"жас",`x + ${n}x = ${(n+1)*y}; x = ${y}; ${n} · ${y} = ${n*y}`]}],
+["4.3. Айнымалысы модуль таңбасының ішінде берілген теңдеулер",d=>{let m=R(1,9),a=R(2,9)+d;if(d==0)return[`|x − ${m}| = ${a} теңдеуінің түбірлерінің қосындысын тап.`,2*m,"",`x = ${m+a} немесе x = ${F(m-a)}; қосындысы ${2*m}`];if(d==2)return[`|x + ${m}| = ${a} теңдеуінің үлкен түбірін тап.`,a-m,"",`x + ${m} = ${a} немесе x + ${m} = −${a}; үлкені ${F(a-m)}`];let k=R(2,4),x=R(3,9),t=R(1,3);return[`|${k}x ${S(k*t)}| = ${k*(x+t)} теңдеуінің түбірлерінің айырмасын (үлкені − кішісі) тап.`,2*x+2*t,"",`x = ${x} немесе x = ${F(-x-2*t)}; ${x} − (${F(-x-2*t)}) = ${2*x+2*t}`]}]
+]},
+{n:"V тарау. Бір айнымалысы бар сызықтық теңсіздіктер",s:[
+["5.1. Санды теңсіздіктер",d=>{let p=R(1,5),q=p+R(3,9)+d;if(d==0)return[`${p} < x < ${q} теңсіздігін қанағаттандыратын натурал x-тер қанша?`,q-p-1,"",`${p+1}, …, ${q-1}: ${q-p-1} сан`];if(d==2)return[`−${p} ≤ x ≤ ${q} теңсіздігін қанағаттандыратын бүтін x-тер қанша?`,p+q+1,"",`${p} + 1 + ${q} = ${p+q+1}`];let s=0;for(let i=-p+1;i<q;i++)s+=i;return[`−${p} < x < ${q} теңсіздігін қанағаттандыратын бүтін x-тердің қосындысын тап.`,s,"",`x = ${F(-p+1)}, …, ${q-1}; қосындысы ${F(s)}`]}],
+["5.2. Санды теңсіздіктердің қасиеттері",d=>{let a=R(2,9),b=a+R(1,5),k=R(2,5)+d;if(d==0)return[`${a} < ${b} теңсіздігінің екі жағына да ${k} қосты. Сол жағы неше болады?`,a+k,"",`${a} + ${k} = ${a+k}`];if(d==2)return[`${a} < ${b} теңсіздігінің екі жағын да −${k} санына көбейтті. Жаңа теңсіздіктің сол жағындағы санды тап.`,-a*k,"",`Теріс санға көбейткенде таңба өзгереді: ${F(-a*k)} > ${F(-b*k)}`];let q=a+R(3,6),m=R(1,9);return[`${a} < x < ${q} және x — бүтін сан. ${k}x ${S(m)} өрнегінің ең үлкен мәнін тап.`,k*(q-1)+m,"",`x ең көбі ${q-1}; ${k} · ${q-1} + ${m} = ${k*(q-1)+m}`]}],
+["5.3. Сан аралықтары",d=>{let a=R(1,6),b=a+R(3,9)+d;if(d==0)return[`[${a}; ${b}) аралығындағы бүтін сандар қанша?`,b-a,"",`${a}, …, ${b-1}: ${b-a} сан`];if(d==2)return[`[−${a}; ${b}] аралығындағы бүтін сандар қанша?`,a+b+1,"",`${a} + 1 + ${b} = ${a+b+1}`];let s=0;for(let i=-a+1;i<=b;i++)s+=i;return[`(−${a}; ${b}] аралығындағы бүтін сандардың қосындысын тап.`,s,"",`x = ${F(-a+1)}, …, ${b}; қосындысы ${F(s)}`]}],
+["5.4. Сан аралықтарының бірігуі мен қиылысуы",d=>{let a=R(1,5),c=a+R(1,3),b=c+R(2,5),e=b+R(1,5);if(d==0)return[`[${a}; ${b}] ∩ [${c}; ${e}] қиылысуындағы бүтін сандар қанша?`,b-c+1,"",`Қиылысуы [${c}; ${b}]: ${b-c+1} сан`];if(d==2)return[`[${a}; ${b}] ∪ [${c}; ${e}] бірігуіндегі бүтін сандар қанша?`,e-a+1,"",`Аралықтар қиылысады, бірігуі [${a}; ${e}]: ${e-a+1} сан`];let s=0;for(let i=c;i<=b;i++)s+=i;return[`[${a}; ${b}] ∩ [${c}; ${e}] қиылысуындағы бүтін сандардың қосындысын тап.`,s,"",`Қиылысуы [${c}; ${b}]; қосындысы ${s}`]}],
+["5.5. Сызықтық теңсіздіктерді шешу. Мәндес теңсіздіктер",d=>{let a=R(2,5),b=R(1,9),c;if(d==0){c=b+R(5,20);return[`x + ${b} < ${c} теңсіздігінің ең үлкен бүтін шешімін тап.`,c-b-1,"",`x < ${c-b}; ең үлкен бүтін шешімі ${c-b-1}`]}if(d==2){c=b+R(a,9*a);let v=Math.ceil((c-b)/a)-1;return[`${a}x ${S(b)} < ${c} теңсіздігінің ең үлкен бүтін шешімін тап.`,v,"",`${a}x < ${c-b}; x < ${F((c-b)/a)}; ең үлкен бүтіні ${v}`]}c=R(1,9);b=c+R(a,9*a);let v=Math.ceil((b-c)/a)-1;return[`${b} − ${a}x > ${c} теңсіздігінің ең үлкен бүтін шешімін тап.`,v,"",`−${a}x > ${c-b}; x < ${F((b-c)/a)} (таңба өзгерді); ең үлкен бүтіні ${v}`]}],
+["5.6. Сызықтық теңсіздіктер жүйесін шешу",d=>{let a=R(1,5),b=R(1,5),c=R(1,5);if(d==0){let e=a+b+c+R(3,9);return[`x − ${a} > ${b} және x + ${c} < ${e} жүйесінің бүтін шешімдері қанша?`,e-c-a-b-1,"",`x > ${a+b}; x < ${e-c}; ${e-c-a-b-1} бүтін сан`]}let p=R(1,6),q=p+R(3,9),k=R(2,5),m=R(2,5),t=R(1,6);if(d==2)return[`${k}x > ${k*p} және ${m}x ≤ ${m*q} жүйесінің бүтін шешімдері қанша?`,q-p,"",`x > ${p}; x ≤ ${q}; ${q-p} бүтін сан`];return[`${k}x ${S(t)} > ${k*p+t} және ${m}x − ${t} ≤ ${m*q-t} жүйесінің бүтін шешімдері қанша?`,q-p,"",`x > ${p}; x ≤ ${q}; ${q-p} бүтін сан`]}],
+["5.7. Айнымалысы модуль таңбасының ішінде берілген теңсіздіктерді шешу",d=>{let a=R(2,9)+d,m=R(1,9),k=R(2,4);if(d==0)return[`|x| < ${a} теңсіздігінің бүтін шешімдері қанша?`,2*a-1,"",`−${a} < x < ${a}: ${2*a-1} сан`];if(d==2)return[`|x − ${m}| ≤ ${a} теңсіздігінің бүтін шешімдері қанша?`,2*a+1,"",`${F(m-a)} ≤ x ≤ ${m+a}: ${2*a+1} сан`];return[`|${k}x − ${k*m}| < ${k*a} теңсіздігінің бүтін шешімдері қанша?`,2*a-1,"",`|x − ${m}| < ${a}; ${F(m-a)} < x < ${m+a}: ${2*a-1} сан`]}]
+]},
+{n:"VI тарау. Координаталық жазықтық",s:[
+["6.1. Жазықтық. Қиылысатын түзулер",d=>{if(d==0){let n=R(3,9);return[`Жазықтықта ${n} түзудің әрқайсысы қалғандарымен қиылысады, үш түзу бір нүктеден өтпейді. Қиылысу нүктелері қанша?`,n*(n-1)/2,"",`${n} · ${n-1} : 2 = ${n*(n-1)/2}`]}if(d==2){let n=R(7,12);return[`Жазықтықта ${n} түзудің екеуі де параллель емес, үшеуі бір нүктеден өтпейді. Қиылысу нүктелерінің саны қанша?`,n*(n-1)/2,"",`${n} · ${n-1} : 2 = ${n*(n-1)/2}`]}let n=R(4,8);return[`${n} түзу жазықтықты ең көбі неше бөлікке бөле алады?`,n*(n+1)/2+1,"",`${n} · ${n+1} : 2 + 1 = ${n*(n+1)/2+1}`]}],
+["6.2. Перпендикуляр түзулер",d=>{if(d==0){let a=R(20,160);if(a==90)a=70;return[`Екі түзу қиылысқанда бір бұрыш ${a}° болды. Оған көршілес бұрышты тап.`,180-a,"°",`180° − ${a}° = ${180-a}°`]}if(d==2){let k=2*R(5,40);return[`Қиылысқан екі түзудің көршілес бұрыштарының айырмасы ${k}°. Кіші бұрышты тап.`,(180-k)/2,"°",`x + (x + ${k}) = 180; x = ${(180-k)/2}`]}let[p,q]=A([1,2],[1,3],[2,3],[1,5],[2,7],[4,5]);return[`Қиылысқан екі түзудің көршілес бұрыштарының қатынасы ${p} : ${q}. Кіші бұрышты тап.`,180*p/(p+q),"°",`180° : ${p+q} = ${180/(p+q)}°; ${p} · ${180/(p+q)} = ${180*p/(p+q)}°`]}],
+["6.3. Параллель түзулер",d=>{if(d==0){let a=R(30,150);return[`Параллель түзулерді қиюшы қиғанда бір жақты бұрыштардың бірі ${a}°. Екіншісін тап.`,180-a,"°",`180° − ${a}° = ${180-a}°`]}if(d==2){let k=2*R(5,40);return[`Параллель түзулерді қиюшы қиғанда бір жақты бұрыштардың айырмасы ${k}°. Үлкен бұрышты тап.`,(180+k)/2,"°",`x + (x − ${k}) = 180; x = ${(180+k)/2}`]}let k=A(2,3,4,5,8,9,11);return[`Параллель түзулерді қиюшы қиғанда бір жақты бұрыштардың бірі екіншісінен ${k} есе үлкен. Үлкен бұрышты тап.`,180*k/(k+1),"°",`180° : ${k+1} = ${180/(k+1)}°; ${k} · ${180/(k+1)} = ${180*k/(k+1)}°`]}],
+["6.4. Тік бұрышты координаталар жүйесі. Координаталық жазықтық",d=>{let x1=R(-9,-1),x2=x1+R(3,12),y1=R(-8,-1),y2=y1+R(3,9);if(d==0)return[`A(${F(x1)}; ${F(y1)}) нүктесінен Ox осіне дейінгі қашықтықты тап.`,-y1,"",`Қашықтық ордината модуліне тең: |${F(y1)}| = ${-y1}`];if(d==2)return[`A(${F(x1)}; ${F(y1)}) және B(${F(x2)}; ${F(y1)}) нүктелерінің арақашықтығын тап.`,x2-x1,"",`Ординаталары тең: |${F(x2)} − (${F(x1)})| = ${x2-x1}`];return[`Тіктөртбұрыштың төбелері: A(${F(x1)}; ${F(y1)}), B(${F(x2)}; ${F(y1)}), C(${F(x2)}; ${F(y2)}), D(${F(x1)}; ${F(y2)}). Ауданын тап.`,(x2-x1)*(y2-y1),"",`AB = ${x2-x1}; BC = ${y2-y1}; S = ${(x2-x1)*(y2-y1)}`]}],
+["6.5. Осьтік симметрия",d=>{let a=R(-9,9),b=R(1,9)*A(-1,1);if(!a)a=4;if(d==0)return[`A(${F(a)}; ${F(b)}) нүктесіне Ox осіне қатысты симметриялы нүктенің ординатасын тап.`,-b,"",`Ox осіне қатысты ордината таңбасы өзгереді: ${F(-b)}`];if(d==2)return[`A(${F(a)}; ${F(b)}) нүктесіне Oy осіне қатысты симметриялы нүктенің абсциссасын тап.`,-a,"",`Oy осіне қатысты абсцисса таңбасы өзгереді: ${F(-a)}`];return[`A(${F(a)}; ${F(b)}) нүктесі мен оған Ox осіне қатысты симметриялы нүктенің арақашықтығын тап.`,2*Math.abs(b),"",`Нүкте (${F(a)}; ${F(-b)}); 2 · |${F(b)}| = ${2*Math.abs(b)}`]}],
+["6.6. Центрлік симметрия",d=>{let a=R(-9,9),b=R(-9,9),m=R(-5,5),n=R(-5,5);if(d==0)return[`A(${F(a)}; ${F(b)}) нүктесіне координаталар басына қатысты симметриялы нүктенің абсциссасын тап.`,-a,"",`Екі координата да таңбасын өзгертеді: ${F(-a)}`];if(d==2)return[`A(${F(a)}; ${F(b)}) нүктесіне M(${F(m)}; ${F(n)}) центріне қатысты симметриялы нүктенің абсциссасын тап.`,2*m-a,"",`M — кесіндінің ортасы: 2 · (${F(m)}) − (${F(a)}) = ${F(2*m-a)}`];return[`A(${F(a)}; ${F(b)}) нүктесіне M(${F(m)}; ${F(n)}) центріне қатысты симметриялы нүктенің координаталарының қосындысын тап.`,2*m-a+2*n-b,"",`(${F(2*m-a)}; ${F(2*n-b)}); қосындысы ${F(2*m-a+2*n-b)}`]}]
+]},
+{n:"VII тарау. Кеңістіктегі фигуралар",s:[
+["7.1. Фигуралардың кеңістікте орналасуы. Көрінбейтін сызықтар",d=>{if(d==0){let a=R(2,9);return[`Кубтың қыры ${a} см. Оның барлық қырларының ұзындықтарының қосындысын тап.`,12*a,"см",`Кубтың 12 қыры бар: 12 · ${a} = ${12*a}`]}if(d==2){let a=R(2,9),b=R(2,9),c=R(2,9);return[`Тікбұрышты параллелепипедтің өлшемдері ${a} см, ${b} см, ${c} см. Барлық қырларының қосындысын тап.`,4*(a+b+c),"см",`4 · (${a} + ${b} + ${c}) = ${4*(a+b+c)}`]}let n=R(5,12);return[`Негізі ${n} бұрышты призманың қырлары қанша?`,3*n,"",`Негіздерінде 2 · ${n}, бүйір қырлары ${n}: 3 · ${n} = ${3*n}`]}],
+["7.2. Вектор ұғымы",d=>{let x1=R(-6,3),y1=R(-6,3),dx=R(2,9),dy=R(-8,8);if(d==0)return[`A(${F(x1)}; ${F(y1)}), B(${F(x1+dx)}; ${F(y1+dy)}). AB векторының бірінші координатасын тап.`,dx,"",`${F(x1+dx)} − (${F(x1)}) = ${dx}`];if(d==2)return[`A(${F(x1)}; ${F(y1)}), B(${F(x1+dx)}; ${F(y1+dy)}). AB векторының екінші координатасын тап.`,dy,"",`${F(y1+dy)} − (${F(y1)}) = ${F(dy)}`];let[p,q,r]=A([3,4,5],[5,12,13],[6,8,10],[8,15,17]),k=R(1,2);return[`A(${F(x1)}; ${F(y1)}), B(${F(x1+p*k)}; ${F(y1+q*k)}). AB векторының ұзындығын тап.`,r*k,"",`Координаталары (${p*k}; ${q*k}); ұзындығы √(${(p*k)**2} + ${(q*k)**2}) = ${r*k}`]}]
+]},
+{n:"VIII тарау. Статистика. Комбинаторика",s:[
+["8.1. Бірнеше санның арифметикалық ортасы",d=>{if(d==0){let n=R(4,6),m=R(5,15),a=[];for(let i=1;i<n;i++)a.push(R(m-3,m+3));a.push(m*n-a.reduce((x,y)=>x+y,0));a=sh(a);return[`${a.join("; ")} сандарының арифметикалық ортасын тап.`,m,"",`(${a.join(" + ")}) : ${n} = ${m*n} : ${n} = ${m}`]}if(d==2){let n=R(3,6),m=R(5,15),t=R(1,5),x=m+(n+1)*t;return[`${n} санның арифметикалық ортасы ${m}. Оларға ${x} санын қосқанда, орташасы неше болады?`,m+t,"",`(${n} · ${m} + ${x}) : ${n+1} = ${(n+1)*(m+t)} : ${n+1} = ${m+t}`]}let n=R(4,7),m=R(8,15),t=R(1,4),x=m+(n-1)*t;return[`${n} санның арифметикалық ортасы ${m}. Солардың біреуін (${x}) алып тастағанда, қалғандарының орташасы неше болады?`,m-t,"",`(${n} · ${m} − ${x}) : ${n-1} = ${(n-1)*(m-t)} : ${n-1} = ${m-t}`]}],
+["8.2. Өзгеру құлашы, медиана, мода",d=>{let U=sh([...Array(30).keys()].map(i=>i+1));if(d==0){let a=U.slice(0,5),M=Math.max(...a),N=Math.min(...a);return[`${a.join("; ")} қатарының өзгеру құлашын тап.`,M-N,"",`${M} − ${N} = ${M-N}`]}if(d==2){let a=U.slice(0,5),b=a.slice().sort((x,y)=>x-y);return[`${a.join("; ")} қатарының медианасын тап.`,b[2],"",`Өсу ретімен: ${b.join("; ")}; ортадағы сан ${b[2]}`]}let v=U[0],a=sh([v,v,v,...U.slice(1,5)]);return[`${a.join("; ")} қатарының модасын тап.`,v,"",`${v} саны ең жиі (3 рет) кездеседі`]}],
+["8.3. Іріктеу тәсілі арқылы комбинаторикалық есептерді шығару",d=>{if(d==0){let a=R(2,6),b=R(2,6);return[`${a} көйлек пен ${b} юбкадан неше түрлі киім жиынтығын құрауға болады?`,a*b,"",`${a} · ${b} = ${a*b}`]}if(d==2){let n=R(5,12);return[`${n} оқушыдан старост пен оның көмекшісін неше тәсілмен сайлауға болады?`,n*(n-1),"",`${n} · ${n-1} = ${n*(n-1)}`]}let n=R(4,9);return[`1-ден ${n}-ге дейінгі цифрлардан цифрлары қайталанбайтын неше үш таңбалы сан құруға болады?`,n*(n-1)*(n-2),"",`${n} · ${n-1} · ${n-2} = ${n*(n-1)*(n-2)}`]}]
+]},
+{n:"IX тарау. Шамалар арасындағы тәуелділіктер",s:[
+["9.1. Тәуелділіктің формуламен берілуі",d=>{let a=R(2,6),b=R(1,9),t=R(1,9);if(d==0)return[`y = ${a}x ${S(b)} формуласында x = ${t} болғанда y-ті тап.`,a*t+b,"",`${a} · ${t} + ${b} = ${a*t+b}`];if(d==2)return[`y = ${a}x ${S(b)} формуласында y = ${a*t+b} болғанда x-ті тап.`,t,"",`${a}x = ${a*t+b} − ${b} = ${a*t}; x = ${t}`];return[`y = ${a}x² − ${b} формуласында x = −${t} болғанда y-ті тап.`,a*t*t-b,"",`${a} · ${t*t} − ${b} = ${a*t*t-b}`]}],
+["9.2. Тәуелділіктің кестемен берілуі",d=>{let a=R(2,6),b=R(1,9),n=R(6,10);if(d==0)return[`x = 1, 2, 3 болғанда y = ${a}, ${2*a}, ${3*a}. Тәуелділік y = ${a}x түрінде. x = ${n} болғанда y неге тең?`,a*n,"",`${a} · ${n} = ${a*n}`];if(d==2)return[`x = 1, 2, 3 болғанда y = ${a+b}, ${2*a+b}, ${3*a+b}. Заңдылықты тауып, x = ${n} болғандағы y-ті тап.`,a*n+b,"",`y = ${a}x + ${b}; ${a} · ${n} + ${b} = ${a*n+b}`];return[`x = 1, 2, 3 болғанда y = ${a}, ${4*a}, ${9*a}. Заңдылықты тауып, x = ${n} болғандағы y-ті тап.`,a*n*n,"",`y = ${a}x²; ${a} · ${n*n} = ${a*n*n}`]}],
+["9.3. Тәуелділіктің графикпен кескінделуі",d=>{let a=R(2,6),b=R(1,9),t=R(1,9);if(d==0)return[`y = ${a}x ${S(b)} функциясының графигі Oy осін қай нүктеде қияды? Ординатасын жаз.`,b,"",`x = 0 болғанда y = ${b}`];if(d==2)return[`y = ${a}x − ${a*t} функциясының графигі Ox осін қай нүктеде қияды? Абсциссасын жаз.`,t,"",`${a}x − ${a*t} = 0; x = ${t}`];let k=A(-4,-3,-2,2,3,4,5),c=R(-5,5),x1=R(-5,0),x2=x1+R(1,5);return[`y = kx + b түзуінің графигі A(${F(x1)}; ${F(k*x1+c)}) және B(${F(x2)}; ${F(k*x2+c)}) нүктелері арқылы өтеді. k-ны тап.`,k,"",`k = (${F(k*x2+c)} − (${F(k*x1+c)})) : (${F(x2)} − (${F(x1)})) = ${F(k)}`]}],
+["9.4. Нақты процестердің графиктерін пайдаланып тәуелділікті зерттеу",d=>{let v=R(4,9)*10,t=R(2,5);if(d==0)return[`Автомобиль ${v} км/сағ жылдамдықпен ${t} сағ жүрді. Жүрген жолын тап.`,v*t,"км",`S = v · t = ${v} · ${t} = ${v*t}`];if(d==2){let w=R(4,9)*10,u=R(1,4);return[`Автомобиль ${v} км/сағ жылдамдықпен ${t} сағ, сосын ${w} км/сағ жылдамдықпен ${u} сағ жүрді. Барлық жолды тап.`,v*t+w*u,"км",`${v} · ${t} + ${w} · ${u} = ${v*t+w*u}`]}let w=v+2*R(1,4)*10;return[`Автомобиль жолдың жартысын ${v} км/сағ, екінші жартысын ${w} км/сағ жылдамдықпен жүрді (уақыты бірдей). Орташа жылдамдығын тап.`,(v+w)/2,"км/сағ",`Уақыты бірдей болғандықтан: (${v} + ${w}) : 2 = ${(v+w)/2}`]}],
+["9.5. Тура пропорционалдық және оның графигі",d=>{let k=R(2,9),a=R(2,6),c=a+R(1,6);if(d==0)return[`y = ${k}x функциясында x = ${c} болғанда y-ті тап.`,k*c,"",`${k} · ${c} = ${k*c}`];if(d==2)return[`y = kx тура пропорционалдығында x = ${a} болғанда y = ${k*a}. x = ${c} болғанда y-ті тап.`,k*c,"",`k = ${k*a} : ${a} = ${k}; ${k} · ${c} = ${k*c}`];return[`y = kx функциясының графигі A(${a}; −${k*a}) нүктесі арқылы өтеді. x = ${c} болғанда y-ті тап.`,-k*c,"",`k = −${k*a} : ${a} = −${k}; −${k} · ${c} = ${F(-k*c)}`]}]
+]},
+{n:"X тарау. Екі айнымалысы бар сызықтық теңдеулер және олардың жүйелері",s:[
+["10.1. Екі айнымалысы бар сызықтық теңдеу",d=>{let a=R(2,5),b=R(2,5),x=R(-5,6),y=R(-5,6),c=a*x+b*y;if(d==0)return[`${a}x ${S(b)}y = ${F(c)} теңдеуінде x = ${F(x)} болғанда y-ті тап.`,y,"",`${b}y = ${F(c)} − ${a} · (${F(x)}) = ${F(b*y)}; y = ${F(y)}`];if(d==2)return[`${a}x ${S(b)}y = ${F(c)} теңдеуінде y = ${F(y)} болғанда x-ті тап.`,x,"",`${a}x = ${F(c)} − ${b} · (${F(y)}) = ${F(a*x)}; x = ${F(x)}`];let k=A(-5,-4,-3,-2,2,3,4,5),w=A(-4,-3,-2,2,3,4),c2=a*x+k*w;return[`${a}x + ky = ${F(c2)} теңдеуінің бір шешімі (${F(x)}; ${F(w)}). k-ны тап.`,k,"",`k · (${F(w)}) = ${F(c2)} − ${a} · (${F(x)}) = ${F(k*w)}; k = ${F(k)}`]}],
+["10.2. Екі айнымалысы бар сызықтық теңдеудің графигі (қосымша оқу)",d=>{let a=R(2,5),b=R(2,5),t=R(2,9);if(d==0)return[`${a}x ${S(b)}y = ${b*t} теңдеуінің графигі Oy осін қай нүктеде қияды? Ординатасын жаз.`,t,"",`x = 0 болғанда ${b}y = ${b*t}; y = ${t}`];if(d==2)return[`${a}x ${S(b)}y = ${a*t} теңдеуінің графигі Ox осін қай нүктеде қияды? Абсциссасын жаз.`,t,"",`y = 0 болғанда ${a}x = ${a*t}; x = ${t}`];let p=2*R(1,4),q=R(2,9);return[`${q}x ${S(p)}y = ${p*q} теңдеуінің графигі мен координаталық остер құрайтын үшбұрыштың ауданын тап.`,p*q/2,"",`Ox осімен (${p}; 0), Oy осімен (0; ${q}) қиылысады; S = ${p} · ${q} : 2 = ${p*q/2}`]}],
+["10.3. Екі айнымалысы бар сызықтық теңдеулер және олардың жүйелері",d=>{let x=R(-6,9),y=R(-6,9),a=R(2,5);if(d==0)return[`x + y = ${F(x+y)} және x − y = ${F(x-y)} жүйесінің шешімі (x; y). x-ті тап.`,x,"",`Қоссақ: 2x = ${F(2*x)}; x = ${F(x)}`];if(d==2)return[`${a}x + y = ${F(a*x+y)} және x − y = ${F(x-y)} жүйесінің шешімі (x; y). y-ті тап.`,y,"",`Қоссақ: ${a+1}x = ${F((a+1)*x)}; x = ${F(x)}; y = ${F(y)}`];let b=R(2,5),m=R(2,5),n=R(2,5);if(a*n==b*m)n++;return[`${a}x + ${b}y = ${F(a*x+b*y)} және ${m}x + ${n}y = ${F(m*x+n*y)} жүйесінің шешімі (x; y). x + y қосындысын тап.`,x+y,"",`Шешімі: x = ${F(x)}, y = ${F(y)}; x + y = ${F(x+y)}`]}],
+["10.4. Жүйені алмастыру тәсілімен шешу",d=>{let x=R(-5,6),k=R(2,4),m=R(1,6),a=R(2,5),b=R(2,4),y=k*x+m,c=a*x+b*y;if(d==0)return[`y = ${k}x ${S(m)} және ${a}x ${S(b)}y = ${F(c)} жүйесін алмастыру тәсілімен шеш. x-ті тап.`,x,"",`${a}x + ${b}(${k}x ${S(m)}) = ${F(c)}; ${a+b*k}x = ${F(c-b*m)}; x = ${F(x)}`];if(d==2)return[`y = ${k}x ${S(m)} және ${a}x ${S(b)}y = ${F(c)} жүйесін алмастыру тәсілімен шеш. y-ті тап.`,y,"",`${a+b*k}x = ${F(c-b*m)}; x = ${F(x)}; y = ${k} · (${F(x)}) ${S(m)} = ${F(y)}`];return[`y = ${k}x ${S(m)} және ${a}x ${S(b)}y = ${F(c)} жүйесін шеш. x · y көбейтіндісін тап.`,x*y,"",`x = ${F(x)}; y = ${F(y)}; x · y = ${F(x*y)}`]}],
+["10.5. Жүйені қосу тәсілімен шешу",d=>{let x=R(-5,6),y=R(-5,6),a=R(2,5),b=R(2,5);if(d==0)return[`${a}x ${S(b)}y = ${F(a*x+b*y)} және ${a}x − ${b}y = ${F(a*x-b*y)} жүйесін қосу тәсілімен шеш. x-ті тап.`,x,"",`Қоссақ: ${2*a}x = ${F(2*a*x)}; x = ${F(x)}`];let m=R(2,5);if(d==2)return[`${a}x ${S(b)}y = ${F(a*x+b*y)} және ${m}x − ${b}y = ${F(m*x-b*y)} жүйесін қосу тәсілімен шеш. x-ті тап.`,x,"",`Қоссақ: ${a+m}x = ${F((a+m)*x)}; x = ${F(x)}`];let n=R(2,5);if(a*n==b*m)n++;return[`${a}x + ${b}y = ${F(a*x+b*y)} және ${m}x + ${n}y = ${F(m*x+n*y)} жүйесін қосу тәсілімен шеш. x + y қосындысын тап.`,x+y,"",`Теңдеулерді көбейтіп қосып: x = ${F(x)}, y = ${F(y)}; x + y = ${F(x+y)}`]}]
+]}
+];
+const H=[
+()=>{let p=R(2,5),q=p+R(1,4),k=R(3,12);return[`Екі санның қатынасы ${p} : ${q}, олардың айырмасы ${(q-p)*k}. Үлкен санды тап.`,q*k,"",`(${q} − ${p}) · k = ${(q-p)*k}; k = ${k}; ${q} · ${k} = ${q*k}`]},
+()=>{let p=R(1,3),q=p+R(1,2),r=q+R(1,3),k=R(2,9)*5,t=(p+q+r)*k;return[`${t} теңгені үш оқушыға ${p} : ${q} : ${r} қатынасында бөлді. Ең көп алған оқушы ең аз алғаннан қанша теңге артық алды?`,(r-p)*k,"теңге",`${t} : ${p+q+r} = ${k}; (${r} − ${p}) · ${k} = ${(r-p)*k}`]},
+()=>{let[b,g]=A([5,3],[4,3],[5,4],[5,2]),m=R(2,9),v=(b-g)/b*100;return[`Сыныпта ${(b+g)*m} оқушы бар, оның ${b*m}-і ұл бала. Қыз балалар саны ұл балалар санынан неше пайызға аз?`,v,"%",`Қыздар: ${g*m}; (${b*m} − ${g*m}) : ${b*m} · 100% = ${F(v)}%`]},
+()=>{let p=R(2,5),q=p+R(1,3),m=R(2,9),a=(q-p)*m,x=p*m;return[`x : (x + ${a}) = ${p} : ${q} пропорциясынан x-ті тап.`,x,"",`${q}x = ${p}(x + ${a}); ${q-p}x = ${p*a}; x = ${x}`]},
+()=>{let a=R(4,9),s=R(10,15),n=R(2,6),pr=R(20,30)*10;return[`Автомобиль ${a} л бензинмен ${a*s} км жүреді. 1 л бензин ${pr} теңге. ${s*n} км жолға қанша теңгенің бензині керек?`,a*n*pr,"теңге",`${s*n} км үшін ${a*n} л; ${a*n} · ${pr} = ${a*n*pr}`]},
+()=>{let w=R(3,6),e=R(2,5),r=R(2,4),x=R(2,5),W=w+e,d=x+W*r;return[`${w} құрылысшы жұмысты ${d} күнде аяқтайды. ${x} күннен кейін тағы ${e} құрылысшы қосылды. Қалған жұмыс неше күнде бітеді?`,w*r,"күн",`Қалғаны ${w}-ға ${d-x} күндік жұмыс: ${w*(d-x)} адам-күн; ${w*(d-x)} : ${W} = ${w*r}`]},
+()=>{let N=400*R(1,5),a=A(10,20,25,40,50),b=A(10,20,25,40,50),L1=N*(100-a)/100,L2=L1*(100-b)/100;return[`Кітапта ${N} бет бар. Бірінші күні ${a}%-ы, екінші күні қалғанының ${b}%-ы оқылды. Неше бет оқылмай қалды?`,L2,"бет",`${N} · ${100-a}% = ${L1}; ${L1} · ${100-b}% = ${L2}`]},
+()=>{let k=R(2,9),N=100*k,[p,q]=A([20,25],[50,40],[10,50],[25,20],[40,25]),f=k*(100+p)*(100-q)/100;return[`Тауар бағасы ${p}%-ға өсті, сосын ${q}%-ға төмендеп, ${f} теңге болды. Бастапқы баға қанша?`,N,"теңге",`x · ${100+p}% · ${100-q}% = ${f}; x = ${N}`]},
+()=>{let p=A(25,100,150,300,400),v=p/(100+p)*100;return[`A саны B санынан ${p}%-ға артық. B саны A санынан неше пайызға кем?`,v,"%",`B = 100% болса, A = ${100+p}%; айырма ${p}; ${p} : ${100+p} · 100% = ${F(v)}%`]},
+()=>{let S=A(1000,2000,5000),a=R(2,9),b=R(5,12),v=a*b*S*S/10000;return[`Масштаб 1 : ${S}. Картада учаске ${a} см × ${b} см тіктөртбұрыш. Нақты учаскенің ауданы неше м²?`,v,"м²",`${a*S/100} м · ${b*S/100} м = ${v} м²`]},
+()=>{let r=R(2,6),Q=r+R(2,5),v=3.14*(Q*Q-r*r);return[`Сақинаның сыртқы радиусы ${Q} см, ішкі радиусы ${r} см. Сақина ауданын тап (π ≈ 3,14).`,v,"см²",`3,14 · (${Q*Q} − ${r*r}) = 3,14 · ${Q*Q-r*r} = ${F(v)}`]},
+()=>{let a=R(3,9),b=R(4,15),c=R(3,15),t=[-a,-a+b,-a+b-c],mx=Math.max(...t),mn=Math.min(...t);return[`Түнде температура −${a} °C болды, күндіз түнгіден ${b} градусқа жоғары, кешке күндізгіден ${c} градусқа төмен болды. Тәуліктегі ең жоғары және ең төмен температура айырмасы қанша?`,mx-mn,"°C",`Температуралар: ${t.map(F).join("; ")}; ${F(mx)} − (${F(mn)}) = ${mx-mn}`]},
+()=>{let a=R(2,9),b=R(2,9);return[`−(−(−${a})) − (−${b}) өрнегінің мәнін тап.`,b-a,"",`−(−(−${a})) = −${a}; −${a} + ${b} = ${b-a}`]},
+()=>{let n=R(6,12),m=R(1,4);return[`${m} < |x| ≤ ${n} шарттарын қанағаттандыратын бүтін x-тер қанша?`,2*(n-m),"",`|x| = ${m+1}, …, ${n}: ${n-m} мән, әрқайсысына оң және теріс x: ${2*(n-m)}`]},
+()=>{let x=R(-9,9),y=R(-9,9),z=R(-9,9),Q=v=>v<0?`(−${-v})`:v,v=Math.abs(x-y)+Math.abs(y-z)-Math.abs(z-x);return[`|${Q(x)} − ${Q(y)}| + |${Q(y)} − ${Q(z)}| − |${Q(z)} − ${Q(x)}| өрнегінің мәнін тап.`,v,"",`|${F(x-y)}| + |${F(y-z)}| − |${F(z-x)}| = ${Math.abs(x-y)} + ${Math.abs(y-z)} − ${Math.abs(z-x)} = ${v}`]},
+()=>{let a=R(2,5),b=R(2,5),v=a*(a+1)/2+b*(b+1)/2;return[`−${a},5 < x < ${b},5 теңсіздігін қанағаттандыратын барлық бүтін сандардың модульдерінің қосындысын тап.`,v,"",`x = −${a}, …, ${b}: ${a*(a+1)/2} + ${b*(b+1)/2} = ${v}`]},
+()=>{let[v,w,L]=A([8,2,30],[7,3,20],[9,3,12],[10,5,15],[11,1,60]),d=L*R(1,3);return[`Қайықтың өз жылдамдығы ${v} км/сағ, ағыс жылдамдығы ${w} км/сағ. Қайық ағыспен ${d} км жүзіп, сол жолмен кері қайтты. Барлық жолға неше сағат кетті?`,d/(v+w)+d/(v-w),"сағ",`${d} : ${v+w} + ${d} : ${v-w} = ${d/(v+w)} + ${d/(v-w)}`]},
+()=>{let a=R(2,9),b=R(5,15),c=R(5,15),d=R(2,9),v=-a+b-c+d;return[`A(−${a}) нүктесі оңға ${b} бірлікке, сосын солға ${c} бірлікке, соңында оңға ${d} бірлікке жылжыды. Соңғы нүктенің координатасын тап.`,v,"",`−${a} + ${b} − ${c} + ${d} = ${F(v)}`]},
+()=>{let n=R(8,20),v=-n*(n+1)/2;return[`(−1) + (−2) + (−3) + … + (−${n}) қосындысын тап.`,v,"",`−(1 + 2 + … + ${n}) = −${n}·${n+1} : 2 = ${v}`]},
+()=>{let n=R(10,60);return[`−1 + 2 − 3 + 4 − … − ${2*n-1} + ${2*n} өрнегінің мәнін тап.`,n,"",`(−1 + 2) + (−3 + 4) + … : ${n} жұп, әрқайсысы 1: ${n}`]},
+()=>{let n=R(3,9),m=n+R(3,9),v=(m*(m+1)-n*(n+1))/2;return[`−${n} + (−${n-1}) + … + (−1) + 0 + 1 + … + ${m} қосындысын тап.`,v,"",`Қарама-қарсы сандар жойылады, қалғаны ${n+1} + … + ${m} = ${v}`]},
+()=>{let a=R(2,9),b=R(2,9),c=R(2,9);return[`−${a} − (−${b} − (−${c})) өрнегінің мәнін тап.`,-a+b-c,"",`−${b} − (−${c}) = ${F(c-b)}; −${a} − (${F(c-b)}) = ${F(-a+b-c)}`]},
+()=>{let a=R(2,9),b=R(2,14),v=(b-a)/2;return[`A(−${a}) және B(${b}) нүктелерін қосатын кесіндінің ортасы — C. C нүктесінің координатасын тап.`,v,"",`(−${a} + ${b}) : 2 = ${F(v)}`]},
+()=>{let n=R(3,7),f=[1,1,2,6,24,120,720,5040][n],v=(n%2?-1:1)*f;return[`(−1) · (−2) · … · (−${n}) көбейтіндісін тап.`,v,"",`1 · 2 · … · ${n} = ${f}; теріс көбейткіштер саны ${n} — ${n%2?"тақ, нәтиже теріс":"жұп, нәтиже оң"}: ${v}`]},
+()=>{let b=R(3,19);return[`(−0,25) · ${b} · (−4) · (−2,5) · 0,4 өрнегінің мәнін тап.`,-b,"",`(−0,25)·(−4) = 1; (−2,5)·0,4 = −1; 1 · ${b} · (−1) = −${b}`]},
+()=>{let a=R(2,5),b=R(2,5),c=R(2,9);return[`(−${a*b*c}) : (−${a}) : (−${b}) өрнегінің мәнін тап.`,-c,"",`(−${a*b*c}) : (−${a}) = ${b*c}; ${b*c} : (−${b}) = −${c}`]},
+()=>{let k=R(1,5),p=A(5,10,20),N=10000*k,v=N*(100+p)*(100+p)/10000;return[`Салымшы банкке ${N} теңге салды. Банк жыл сайын өткен жылғы сомаға ${p}% қосады. 2 жылдан кейін салымда қанша теңге болады?`,v,"теңге",`${N} · ${100+p}% = ${N*(100+p)/100}; ${N*(100+p)/100} · ${100+p}% = ${v}`]},
+()=>{let b=A(6,7,11,12,13,15),a,r;do{a=R(1,b-1);r=dg(a,b)}while(!r[1].length);let n=R(20,60),pre=r[0],per=r[1],v=n<=pre.length?pre[n-1]:per[(n-pre.length-1)%per.length];return[`${a}/${b} бөлшегін ондық бөлшекке айналдырғанда, үтірден кейінгі ${n}-ші цифр қандай?`,v,"",`${a}/${b} = 0,${pre.join("")}(${per.join("")}); период ұзындығы ${per.length}; ${n}-ші цифр = ${v}`]},
+()=>{let a=R(1,8),b=R(1,9);return[`0,${a}(${b}) = x/90 болса, x-ті тап.`,9*a+b,"",`0,${a}(${b}) = (${a}${b} − ${a}) / 90 = ${9*a+b}/90`]},
+()=>{let m=R(2,6),n=R(2,6),x=R(2,6),y=R(2,6),v=m*x*x+n*x*y;return[`a = −${x}, b = ${y} болғанда ${m}a² − ${n}ab өрнегінің мәнін тап.`,v,"",`${m} · ${x*x} − ${n} · (−${x}) · ${y} = ${m*x*x} + ${n*x*y} = ${v}`]},
+()=>{let k=R(2,6),a=R(2,5),b=R(2,9),m=R(2,5),c=R(2,5),d=R(2,9),v=(k*a-m*c)*2-k*b+m*d;return[`${k}(${a}x − ${b}) − ${m}(${c}x − ${d}) өрнегін ықшамдап, x = 2 болғандағы мәнін тап.`,v,"",`${k*a-m*c}x ${S(m*d-k*b)}; x = 2: ${v}`]},
+()=>{let a=R(2,9),b=R(2,9),c=R(2,9),d=R(2,9),e=R(2,9),v=(a+c-e)*2+(d-b)*-3;return[`${a}x − ${b}y + ${c}x + ${d}y − ${e}x өрнегін ықшамдап, x = 2, y = −3 болғандағы мәнін тап.`,v,"",`${a+c-e}x ${S(d-b)}y; ${a+c-e} · 2 + (${d-b}) · (−3) = ${v}`]},
+()=>{let k=R(3,9),m=R(2,k-1),a=R(2,9),b=R(2,20);return[`${k}(x − ${a}) − (${m}x − ${b}) = ${k-m}x + □ теңбе-теңдігіндегі □ орнына қандай сан қою керек?`,b-k*a,"",`${k}x − ${k*a} − ${m}x + ${b} = ${k-m}x ${S(b-k*a)}`]},
+()=>{let k=R(4,7),p=R(2,k-2),m=R(1,6),n=R(1,6),x=R(-5,9),r=(k-p)*x-k*m-p*n;return[`${k}(x − ${m}) − ${p}(x + ${n}) = ${F(r)} теңдеуін шеш.`,x,"",`${k-p}x − ${k*m+p*n} = ${F(r)}; ${k-p}x = ${F(r+k*m+p*n)}; x = ${F(x)}`]},
+()=>{let a=A(2,3,5,9,11),v=(a+1)/(a-1);return[`(1 + 1/${a}) : (1 − 1/${a}) өрнегінің мәнін тап.`,v,"",`(${a+1}/${a}) : (${a-1}/${a}) = ${a+1}/${a-1} = ${F(v)}`]}
+];
+const $=id=>document.getElementById(id);
+const MD=["Таңдау және жазу","Қатемен жұмыс"];
+const G=()=>l==2?(c<3?H[[0,11,29][c]+s]():C[c].s[s][1](3)):C[c].s[s][1](l?2:0);
+let c=0,s=0,l=0,md=0,cur=[],P={},LOG=[],W={},DB=null,UID=null,tsub=false;
+let TU=null,ready=false,saving=false,dirty=false,saveT=null;
+const sv=()=>{try{if(UID)localStorage.setItem("math6-progress-"+UID,JSON.stringify({n:nm(),P,W,LOG:compact()}));if(UID&&UID!=="teacher"&&LOG.length){const student=students().find(x=>x.id===UID);if(student){const p=Object.assign({},P);Object.keys(W).forEach(k=>(W[k].r||[]).forEach((r,l)=>{if(r)p[k+"-"+l]=Object.assign({},r,{d:today(),m:"Деңгейлік жұмыс"})}));localStorage.setItem("math6-result-"+UID,JSON.stringify({n:student.name,className:student.className,p,a:LOG.slice(-60),t:Date.now()}))}}}catch(e){}};
+const compact=()=>LOG.slice(-80).map(e=>e.w?e:Object.assign({},e,{i:(e.i||[]).map(q=>{if(Array.isArray(q))return q;const r=Object.assign({},q);delete r.h;return r})}));
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=R(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+const fm=(x,u)=>F(x)+(u?(u==="%"?"":" ")+u:"");
+const num=t=>{const m=String(t).replace(/[−–]/g,"-").replace(",",".").match(/-?\d+(\.\d+)?/);return m?+m[0]:NaN};
+const same=(t,v)=>Math.abs(num(t)-v)<0.006;
+function dist(v,u){let c=[v+1,v-1,v+2,v-2,-v,2*v,v+10,v-10,v*10,v/2].map(x=>+x.toFixed(2));c=c.filter(x=>x!==+v.toFixed(2)&&!(u&&v>=0&&x<0));return sh([...new Set(c)]).slice(0,3)}
+function gen(){const o=[],seen={};let t=0;while(o.length<5&&t++<300){const[q,v,u,h]=G();if(seen[q]||!h)continue;seen[q]=1;const a=fm(v,u),ds=dist(v,u);o.push({q,h,v,u,a,o:sh([...new Set([a,...ds.map(x=>fm(x,u))])]),sw:Math.random()<.4?v:ds[0]})}return o}
+const SVG=(w,h,i,ms)=>`<svg class="fig"${ms?` style="max-width:${ms}px"`:""} viewBox="0 0 ${w} ${h}" role="img" aria-label="Сызба"><defs><marker id="ah" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9z" class="mk"/></marker><marker id="ahk" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9z" class="mk2"/></marker></defs>${i}</svg>`;
+const T=(x,y,t,c="",a="")=>`<text class="t ${c}" x="${x}" y="${y}"${a}>${t}</text>`;
+const LN=(x1,y1,x2,y2,c="ax",e="")=>`<line class="${c}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"${e}/>`;
+const SYS=(...q)=>`<span class="sys"><svg class="brs" viewBox="0 0 10 40" preserveAspectRatio="none"><path d="M9 1Q4 1 4 7V15Q4 20 1 20Q4 20 4 25V33Q4 39 9 39"/></svg><span class="eqs">${q.map(e=>`<span>${e}</span>`).join("")}</span></span>`;
+const ADD=r=>`<table class="add">${r.map(x=>`<tr${x.c?` class="${x.c}"`:""}>${x.t.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</table>`;
+const TB=(...r)=>`<div class="tw"><table class="vt">${r.map((x,i)=>`<tr>${x.map((c,j)=>j?`<td>${c}</td>`:`<th>${c}</th>`).join("")}</tr>`).join("")}</table></div>`;
+function nl(y,a,b,o={}){const x=v=>24+(v-a)/(b-a)*352,st=Math.max(1,Math.ceil((b-a)/14));
+let g=LN(12,y,392,y)+`<path class="ax" d="M386 ${y-4}L392 ${y}L386 ${y+4}"/>`;
+for(let v=Math.ceil(a/st)*st;v<=b;v+=st)g+=LN(x(v),y-4,x(v),y+4)+T(x(v),y+19,F(v));
+(o.segs||[]).forEach(s=>{const p=s.a==null?14:x(s.a),q=s.b==null?386:x(s.b);g+=LN(p,y,q,y,"sg");
+if(s.a!=null)g+=`<circle cx="${p}" cy="${y}" r="6" class="${s.ao?"op":"cl"}"/>`;if(s.b!=null)g+=`<circle cx="${q}" cy="${y}" r="6" class="${s.bo?"op":"cl"}"/>`});
+(o.dots||[]).forEach(d=>{g+=`<circle cx="${x(d.v)}" cy="${y}" r="5.5" class="${d.c=="b"?"cl":"dr"}"/>`+(d.l?T(x(d.v),y-12,d.l,d.c=="b"?"tb":"tr"):"")});
+(o.arr||[]).forEach(r=>{const h=y-(r.h||26);g+=LN(x(r.a),h,x(r.b),h,"ar",' marker-end="url(#ah)"')+T((x(r.a)+x(r.b))/2,h-6,r.l,"tr")});
+if(o.txt)g+=T(12,y-34,o.txt,"tl");return g}
+function cp(a,b,c,d,o={}){let ux=o.u||Math.min(30,Math.floor(330/(b-a))),uy=o.u||Math.min(30,Math.floor(230/(d-c)));if(!o.u){const e=Math.min(ux,uy),r=(d-c)/(b-a);if(r<=2.5&&r>=.4)ux=uy=e}
+const lw=(o.xl?30:0)+((o.pts||[]).some(p=>p.l&&p.l.length>3&&(p.dx===undefined||p.dx>0))?36:0),W=(b-a)*ux+56+lw,H=(d-c)*uy+62,ox=28+(0-a)*ux,oy=34+d*uy,px=x=>ox+x*ux,py=y=>oy-y*uy;let g="";
+const sx=Math.max(1,Math.ceil((b-a)/12)),sy=Math.max(1,Math.ceil((d-c)/12));
+for(let i=Math.ceil(a/sx)*sx;i<=b;i+=sx)g+=LN(px(i),py(c),px(i),py(d),"gd");for(let j=Math.ceil(c/sy)*sy;j<=d;j+=sy)g+=LN(px(a),py(j),px(b),py(j),"gd");
+g+=LN(px(a),py(0),px(b)+16,py(0),"ax",' marker-end="url(#ahk)"')+LN(px(0),py(c),px(0),py(d)-16,"ax",' marker-end="url(#ahk)"');
+g+=T(px(b)+14,py(0)+16,o.xl||"x","tl")+T(px(0)+8,py(d)-18,o.yl||"y","tl");
+for(let i=Math.ceil(a/sx)*sx;i<=b;i+=sx)if(i)g+=T(px(i),py(0)+15,(o.lx||F)(i));
+for(let j=Math.ceil(c/sy)*sy;j<=d;j+=sy)if(j)g+=T(px(0)-6,py(j)+5,(o.ly||F)(j),"te");
+(o.poly||[]).forEach(p=>{g+=`<polygon class="pg" points="${p.map(q=>px(q[0])+","+py(q[1])).join(" ")}"/>`});
+(o.lines||[]).forEach(l=>{g+=LN(px(l.p[0]),py(l.p[1]),px(l.p[2]),py(l.p[3]),l.c||"bl",(l.d?' stroke-dasharray="5 4"':"")+(l.ar?' marker-end="url(#ah)"':""))});
+(o.pts||[]).forEach(p=>{g+=`<circle cx="${px(p.x)}" cy="${py(p.y)}" r="4.5" class="${p.c=="b"?"cl":"dr"}"/>`+(p.l?T(px(p.x)+(p.dx||8),py(p.y)+(p.dy||-8),p.l,(p.c=="b"?"tb":"tr")+" tl"):"")});
+(o.tx||[]).forEach(p=>{g+=T(px(p.x),py(p.y),p.t,p.c||"",p.a||"")});
+return SVG(W,H,g,Math.min(440,Math.round(W*1.3)))}
+const BOX=(x,y,w,h,t,c="b1")=>`<rect class="${c}" x="${x}" y="${y}" width="${w}" height="${h}" rx="4"/>`+T(x+w/2,y+h/2+5,t,"tj");
+const BR=(x1,x2,y,t,up)=>{const d=up?-1:1;return `<path class="ax" d="M${x1} ${y}v${6*d}H${x2}v${-6*d}"/>`+T((x1+x2)/2,up?y-12:y+22,t,"tb")};
+const EX={
+"0-1":()=>({q:"60 санын 2 : 3 қатынасында бөл.",fig:SVG(400,120,BR(30,370,28,"60",1)+[0,1,2,3,4].map(i=>BOX(30+i*68,38,68,38,"12",i<2?"b1":"b2")).join("")+BR(30,166,86,"2 бөлік = 24")+BR(166,370,86,"3 бөлік = 36")),
+ st:["Бөліктер саны: 2 + 3 = 5.","Бір бөлік: 60 : 5 = 12.","Бірінші сан: 2 · 12 = 24; екінші сан: 3 · 12 = 36.","Тексеру: 24 + 36 = 60 ✓"],a:"24 және 36"}),
+"0-6":()=>({q:"Сыныпта 40 оқушы бар. Оның 35%-ы қыздар. Қыз қанша?",fig:SVG(400,100,T(200,18,"100% = 40 оқушы","tb")+BOX(20,28,364*.35,34,"35%","b2")+BOX(20+364*.35,28,364*.65,34,"65%","b1")+T(20+364*.175,84,"x","tr")),
+ st:["Пропорция құрамыз: "+FR(40,"x")+" = "+FR("100%","35%")+".","Айқас көбейтеміз: 100 · x = 40 · 35.","x = 40 · 35 : 100 = 1400 : 100 = 14."],a:"14 қыз"}),
+"0-9":()=>({q:"Картада масштаб 1 : 50 000. Картадағы қашықтық 6 см. Жердегі қашықтық неше километр?",fig:SVG(400,100,LN(40,40,360,40,"ar",' marker-end="url(#ah)"')+T(200,30,"картада: 6 см","tb")+LN(40,70,360,70,"ax")+T(200,92,"жерде: ? км","tr")+`<circle cx="40" cy="40" r="4" class="cl"/><circle cx="40" cy="70" r="4" class="dr"/>`),
+ st:["Масштаб: 1 см картада — 50 000 см жерде. Пропорция: "+FR(1,"50 000")+" = "+FR(6,"x")+".","Айқас көбейтеміз: x = 6 · 50 000 = 300 000 см.","300 000 см = 3000 м = 3 км."],a:"3 км"}),
+"0-10":()=>({q:"Шеңбердің радиусы 5 см. Шеңбер ұзындығы мен дөңгелек ауданын тап (π ≈ 3,14).",fig:SVG(400,150,`<circle cx="100" cy="75" r="60" class="pg"/><circle cx="100" cy="75" r="60" class="bl" fill="none"/>`+LN(100,75,160,75,"rd")+`<circle cx="100" cy="75" r="3.5" class="cl"/>`+T(130,67,"r = 5","tr")+T(270,60,"C = 2πr","tb")+T(270,100,"S = πr²","tb")),
+ st:["Шеңбер ұзындығы: C = 2 · 3,14 · 5 = 31,4 см.","Дөңгелек ауданы: S = 3,14 · 5² = 3,14 · 25 = 78,5 см²."],a:"C = 31,4 см; S = 78,5 см²"}),
+"0-3":()=>({q:"x : 4 = 15 : 6 пропорциясынан x-ті тап.".replace(/^(\S+) : (\S+) = (\S+) : (\S+)/,(m,a,b,c,d)=>FR(a,b)+" = "+FR(c,d)),fig:`<div class="bigfr">${FR("x",4)} = ${FR(15,6)}</div>`,
+ st:["Пропорцияны бөлшек түрінде жазамыз: "+FR("x",4)+" = "+FR(15,6)+".","Негізгі қасиет (айқас көбейту): x · 6 = 4 · 15.","6x = 60; x = 60 : 6 = 10.","Тексеру: "+FR(10,4)+" = 2,5 және "+FR(15,6)+" = 2,5 ✓"],a:"10"}),
+"0-4":()=>({q:"8 кг алма 640 теңге тұрады. 13 кг алма неше теңге?",fig:TB(["кг",8,13],["теңге",640,"x"]),
+ st:["Тура пропорционал тәуелділік: алма неше есе көп болса, баға да сонша есе көп.","Пропорция құрамыз: "+FR(8,13)+" = "+FR(640,"x")+".","Айқас көбейтеміз: 8 · x = 13 · 640; x = 8320 : 8 = 1040."],a:"1040 теңге"}),
+"0-5":()=>({q:"2 жұмысшы жұмысты 20 күнде орындайды. 4 жұмысшы неше күнде орындайды?",fig:TB(["жұмысшы",2,4],["күн",20,"x"]),
+ st:["Кері пропорционал тәуелділік: жұмысшы неше есе көп болса, жұмыс сонша есе тез бітеді.","Пропорция құрамыз (күндер қатынасы төңкеріледі): "+FR(2,4)+" = "+FR("x",20)+".","Айқас көбейтеміз: 4 · x = 2 · 20; x = 40 : 4 = 10."],a:"10 күн"}),
+"1-1":()=>({q:"−3 санына қарама-қарсы санды тап және координаталық түзуде көрсет.",fig:SVG(400,80,nl(52,-5,5,{dots:[{v:-3,l:"−3",c:"r"},{v:3,l:"3",c:"r"},{v:0,c:"b"}],arr:[{a:0,b:-3,l:"3 бірлік"},{a:0,b:3,l:"3 бірлік"}]})),
+ st:["Қарама-қарсы сандар 0-ден бірдей қашықтықта, бірақ қарама-қарсы жақта орналасады.","−3 нүктесі 0-ден солға 3 бірлік, сондықтан қарама-қарсы нүкте оңға 3 бірлік."],a:"3"}),
+"1-3":()=>({q:"|−4| + |3| өрнегінің мәнін тап.",fig:SVG(400,80,nl(52,-5,5,{dots:[{v:-4,l:"−4",c:"r"},{v:3,l:"3",c:"r"},{v:0,c:"b"}],arr:[{a:0,b:-4,l:"4"},{a:0,b:3,l:"3"}]})),
+ st:["Санның модулі — оның координаталық түзудегі 0-ден қашықтығы.","|−4| = 4, |3| = 3.","4 + 3 = 7."],a:"7"}),
+"1-5":()=>({q:"Қайықтың меншікті жылдамдығы 12 км/сағ, өзен ағысының жылдамдығы 3 км/сағ. Қайықтың ағыспен және ағысқа қарсы жылдамдығын тап.",fig:SVG(400,130,`<rect x="10" y="10" width="380" height="110" rx="6" class="wt"/>`+LN(40,40,300,40,"ar",' marker-end="url(#ah)"')+T(170,32,"қайық 12 + ағыс 3","tr")+LN(300,40,342,40,"gr"," stroke-dasharray=\"3 3\"")+LN(340,95,120,95,"ar",' marker-end="url(#ah)"')+T(230,87,"қайық 12 − ағыс 3","tr")+T(60,60,"ағыспен →","tb tl")+T(260,118,"← ағысқа қарсы","tb tl")),
+ st:["Ағыспен: v = 12 + 3 = 15 км/сағ (ағыс көмектеседі).","Ағысқа қарсы: v = 12 − 3 = 9 км/сағ (ағыс бөгет болады)."],a:"15 км/сағ және 9 км/сағ"}),
+"1-6":()=>({q:"Координаталық түзуде −2 + 5 қосындысын тап.",fig:SVG(400,80,nl(52,-4,6,{dots:[{v:-2,l:"−2",c:"b"},{v:3,l:"3",c:"r"}],arr:[{a:-2,b:3,l:"+5 (оңға)"}]})),
+ st:["−2 нүктесінен бастаймыз.","Оң сан қосу — оңға жылжу: 5 қадам.","Келген нүкте: 3."],a:"3"}),
+"1-11":()=>({q:"Координаталық түзуде A(−3) және B(4) нүктелерінің арақашықтығын тап.",fig:SVG(400,80,nl(52,-5,6,{dots:[{v:-3,l:"A",c:"r"},{v:4,l:"B",c:"r"}],arr:[{a:-3,b:4,l:"AB = 7"}]})),
+ st:["Арақашықтық = үлкен координата − кіші координата.","AB = 4 − (−3) = 4 + 3 = 7."],a:"7"}),
+"3-2":()=>({q:"Екі санның қосындысы 30, біреуі екіншісінен 6-ға артық. Сандарды тап.",fig:SVG(400,120,BR(20,380,26,"30",1)+BOX(20,36,130,38,"x")+BOX(150,36,130,38,"x")+BOX(280,36,100,38,"6","b2")+T(150,98,"кіші сан = x","tl")+T(150,116,"үлкен сан = x + 6","tl")),
+ st:["Кіші санды x деп аламыз, үлкені x + 6.","Теңдеу: x + (x + 6) = 30.","2x + 6 = 30; 2x = 24; x = 12.","Үлкен сан: 12 + 6 = 18. Тексеру: 12 + 18 = 30 ✓"],a:"12 және 18"}),
+"3-3":()=>({q:"|x − 3| = 5 теңдеуін шеш.",fig:SVG(400,90,nl(60,-4,10,{dots:[{v:-2,l:"−2",c:"r"},{v:3,l:"3",c:"b"},{v:8,l:"8",c:"r"}],arr:[{a:3,b:-2,l:"5"},{a:3,b:8,l:"5"}]})),
+ st:["Модуль — қашықтық: x нүктесі 3 нүктесінен 5 бірлік қашықта.","1-жағдай: x − 3 = 5, x = 8.","2-жағдай: x − 3 = −5, x = −2.","Екі түбір бар, олар 3-тен екі жаққа 5 бірлік."],a:"x = 8 немесе x = −2"}),
+"4-0":()=>({q:"2 < x < 7 теңсіздігін қанағаттандыратын натурал сандарды жаз.",fig:SVG(400,70,nl(40,0,8,{segs:[{a:2,b:7,ao:1,bo:1}],dots:[3,4,5,6].map(v=>({v,c:"r"}))})),
+ st:["Теңсіздік қатаң (< белгісі): 2 және 7 кірмейді — бос шеңбер.","2-ден үлкен және 7-ден кіші натурал сандар: 3, 4, 5, 6."],a:"3; 4; 5; 6"}),
+"4-2":()=>({q:"[−2; 4) аралығын теңсіздік түрінде жаз және түзуде көрсет.",fig:SVG(400,70,nl(40,-4,6,{segs:[{a:-2,b:4,bo:1}]})),
+ st:["Квадрат жақша [ — шеткі нүкте аралыққа кіреді (толтырылған нүкте).","Жуық жақша ) — шеткі нүкте кірмейді (бос нүкте).","Сондықтан −2 ≤ x < 4."],a:"−2 ≤ x < 4"}),
+"4-3":()=>({q:"[1; 6] және [4; 9] аралықтарының қиылысуы мен бірігуін тап.",fig:SVG(400,230,T(12,22,"[1; 6]","tl tb")+nl(40,0,10,{segs:[{a:1,b:6}]})+T(12,92,"[4; 9]","tl tb")+nl(110,0,10,{segs:[{a:4,b:9}]})+T(12,162,"қиылысу [4; 6] және бірігу [1; 9]","tl tr")+nl(186,0,10,{segs:[{a:4,b:6}]})),
+ st:["Қиылысу — екі аралыққа да ортақ бөлік: [4; 6].","Бірігу — екеуінің барлық нүктесі. Аралықтар қиылысады, сондықтан бірігу тұтас: [1; 9]."],a:"қиылысу [4; 6], бірігу [1; 9]"}),
+"4-4":()=>({q:"2x + 3 < 11 теңсіздігін шеш.",fig:SVG(400,70,nl(40,-2,8,{segs:[{a:null,b:4,bo:1}]})),
+ st:["3-ті оң жаққа аударамыз (таңба өзгереді): 2x < 11 − 3.","2x < 8.","Екі жағын да 2-ге бөлеміз (оң сан, таңба сақталады): x < 4.","Жауап — 4-тен кіші барлық сандар."],a:"x < 4, яғни (−∞; 4)"}),
+"4-5":()=>({q:`Теңсіздіктер жүйесін шеш: ${SYS("x − 1 > 2","x + 3 ≤ 9")}`,fig:SVG(400,230,T(12,22,"x > 3","tl tb")+nl(40,0,10,{segs:[{a:3,b:null,ao:1}]})+T(12,92,"x ≤ 6","tl tb")+nl(110,0,10,{segs:[{a:null,b:6}]})+T(12,162,"екеуі де орындалатын бөлік: (3; 6]","tl tr")+nl(186,0,10,{segs:[{a:3,b:6,ao:1}]})),
+ st:["1-теңсіздік: x − 1 > 2, x > 3.","2-теңсіздік: x + 3 ≤ 9, x ≤ 6.","Жүйенің шешімі — екі шешімнің ортақ бөлігі (қиылысуы): 3 < x ≤ 6."],a:"(3; 6]"}),
+"4-6":()=>({q:"|x − 2| ≤ 3 теңсіздігін шеш.",fig:SVG(400,90,nl(60,-3,8,{segs:[{a:-1,b:5}],dots:[{v:2,l:"2",c:"b"}],arr:[{a:2,b:-1,l:"3"},{a:2,b:5,l:"3"}]})),
+ st:["x нүктесі 2-ден 3 бірліктен артық қашықта емес.","Модульсіз жазамыз: −3 ≤ x − 2 ≤ 3.","Барлық бөлікке 2 қосамыз: −1 ≤ x ≤ 5."],a:"[−1; 5]"}),
+"5-0":()=>({q:"3 түзудің әрқайсысы қалғандарымен қиылысады, үшеуі бір нүктеден өтпейді. Қиылысу нүктелері қанша?",fig:SVG(400,150,LN(30,130,270,40,"bl")+LN(30,40,270,130,"bl")+LN(30,110,270,110,"bl")+[[150,85],[83,110],[217,110]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="5" class="dr"/>`).join("")+T(290,75,"3 түзу →","tb tl")+T(290,98,"3 нүкте","tr tl")),
+ st:["Әр түзу қалған 2 түзумен қиылысады: 3 · 2 = 6.","Әр нүкте екі рет есептелді, сондықтан 2-ге бөлеміз: 6 : 2 = 3.","Формула: n түзу үшін n(n − 1) : 2 нүкте."],a:"3 нүкте"}),
+"5-1":()=>({q:"Екі түзу қиылысқанда бір бұрыш 70° болды. Қалған бұрыштарды тап.",fig:SVG(400,170,LN(40,140,240,30,"bl")+LN(40,30,240,140,"bl")+T(190,86,"70°","tr")+T(140,50,"110°","tb")+T(90,86,"70°","tr")+T(140,128,"110°","tb")),
+ st:["Көршілес бұрыштардың қосындысы 180°: 180° − 70° = 110°.","Вертикаль бұрыштар тең: екінші 70° және екінші 110°."],a:"70°, 110°, 70°, 110°"}),
+"5-2":()=>({q:"a және b параллель түзулерін c қиюшысы қиды. Бір жақты бұрыштардың бірі 65°. Екіншісін тап.",fig:SVG(400,170,LN(20,50,300,50,"bl")+LN(20,120,300,120,"bl")+LN(100,150,200,20,"rd")+T(310,54,"a","tb tl")+T(310,124,"b","tb tl")+T(210,22,"c","tr tl")+T(150,70,"65°","tb")+T(98,110,"x","tr")),
+ st:["Параллель түзулерді қиюшы қиғанда бір жақты бұрыштардың қосындысы 180°.","x = 180° − 65° = 115°."],a:"115°"}),
+"5-3":()=>({q:"A(−3; 2) нүктесінен Ox және Oy осьтеріне дейінгі қашықтықты тап.",fig:cp(-5,3,-2,4,{lines:[{p:[-3,2,-3,0],c:"rd",d:1},{p:[-3,2,0,2],c:"rd",d:1}],pts:[{x:-3,y:2,l:"A(−3; 2)",dx:-30,dy:-10}],tx:[{x:-3.6,y:1,t:"2","c":"tr"},{x:-1.5,y:2.5,t:"3","c":"tr"}]}),
+ st:["Ox осіне дейінгі қашықтық — ординатаның модулі: |2| = 2.","Oy осіне дейінгі қашықтық — абсциссаның модулі: |−3| = 3."],a:"2 және 3"}),
+"5-4":()=>({q:"A(3; 2) нүктесіне Ox осіне қатысты симметриялы нүктені тап.",fig:cp(-1,5,-3,3,{lines:[{p:[3,2,3,-2],c:"rd",d:1}],pts:[{x:3,y:2,l:"A(3; 2)"},{x:3,y:-2,l:"A′(3; −2)",dy:16}]}),
+ st:["Ox осіне қатысты симметрияда нүкте осьтің екінші жағына, бірдей қашықтыққа ауысады.","Абсцисса өзгермейді, ордината таңбасы өзгереді: (3; 2) → (3; −2)."],a:"A′(3; −2)"}),
+"5-5":()=>({q:"A(3; 2) нүктесіне M(1; 1) нүктесіне қатысты симметриялы нүктені тап.",fig:cp(-2,4,-1,3,{lines:[{p:[3,2,-1,0],c:"rd",d:1}],pts:[{x:3,y:2,l:"A"},{x:1,y:1,l:"M",c:"b",dy:-10},{x:-1,y:0,l:"A′",dy:-10}]}),
+ st:["M нүктесі AA′ кесіндісінің ортасы.","x: (3 + x′) : 2 = 1, сонда x′ = 2 · 1 − 3 = −1.","y: (2 + y′) : 2 = 1, сонда y′ = 2 · 1 − 2 = 0."],a:"A′(−1; 0)"}),
+"6-0":()=>({q:"Тікбұрышты параллелепипедтің қырлары қанша? Қайсысы көрінбейді?",fig:SVG(400,235,`<g>${LN(50,90,190,90,"bl")+LN(190,90,190,180,"bl")+LN(190,180,50,180,"bl")+LN(50,180,50,90,"bl")+LN(110,45,250,45,"bl")+LN(250,45,250,135,"bl")+LN(50,90,110,45,"bl")+LN(190,90,250,45,"bl")+LN(190,180,250,135,"bl")}</g>`+LN(110,135,50,180,"rd",' stroke-dasharray="6 5"')+LN(110,135,110,45,"rd",' stroke-dasharray="6 5"')+LN(110,135,250,135,"rd",' stroke-dasharray="6 5"')+T(20,208,"тұтас сызық — көрінетін қыр","tb tl")+T(20,228,"штрих — көрінбейтін қыр","tr tl")),
+ st:["Параллелепипедте 12 қыр, 8 төбе, 6 жақ бар.","Алдыңғы жақтан қарағанда 9 қыр көрінеді.","3 қыр арттағы жақтың артында қалады, оларды штрихпен саламыз."],a:"12 қыр, оның 3-еуі көрінбейді"}),
+"6-1":()=>({q:"A(1; 1) және B(5; 4) нүктелері берілген. AB векторының координаталарын және ұзындығын тап.",fig:cp(0,6,0,5,{lines:[{p:[1,1,5,4],c:"rd",ar:1},{p:[1,1,5,1],d:1},{p:[5,1,5,4],d:1}],pts:[{x:1,y:1,l:"A",dx:-14,dy:14,c:"b"},{x:5,y:4,l:"B",c:"b"}],tx:[{x:3,y:.6,t:"4","c":"tb"},{x:5.35,y:2.5,t:"3","c":"tb"}]}),
+ st:["Вектор координаталары = соңы − басы: AB = (5 − 1; 4 − 1) = (4; 3).","Ұзындығы тік бұрышты үшбұрыштың гипотенузасы: |AB| = √(4² + 3²) = √25 = 5."],a:"AB = (4; 3), |AB| = 5"}),
+"7-0":()=>({q:"4; 7; 5; 8; 6 сандарының арифметикалық ортасын тап.",fig:SVG(400,190,[4,7,5,8,6].map((v,i)=>`<rect class="${v>6?"b2":"b1"}" x="${50+i*64}" y="${160-v*16}" width="44" height="${v*16}" rx="3"/>`+T(72+i*64,155-v*16,v,"tb")).join("")+LN(30,160-6*16,380,160-6*16,"rd",' stroke-dasharray="6 5"')+T(385,160-6*16+5,"6","tr tl")+LN(30,160,380,160)+T(200,182,"орташа мән = 6","tr")),
+ st:["Барлық сандарды қосамыз: 4 + 7 + 5 + 8 + 6 = 30.","Сандар саны 5. Қосындыны санға бөлеміз: 30 : 5 = 6."],a:"6"}),
+"7-1":()=>({q:"3; 7; 3; 9; 5; 3; 8 қатарының өзгеру құлашын, медианасын және модасын тап.",fig:SVG(400,180,T(200,20,"өсу ретімен жазылған қатар","tb")+[3,3,3,5,7,8,9].map((v,i)=>BOX(18+i*53,30,48,36,v,i<3?"b3":i==3?"b2":"b1")).join("")+BR(18,18+2*53+48,76,"мода 3 (3 рет)")+T(18+3*53+24,108,"медиана","tr")+T(18+3*53+24,126,"(ортадағы сан)","tr")+BR(18,18+6*53+48,146,"құлаш: 9 − 3 = 6")),
+ st:["Өсу ретімен жазамыз: 3, 3, 3, 5, 7, 8, 9.","Құлаш = ең үлкен − ең кіші = 9 − 3 = 6.","Медиана — ортадағы сан (7 санның 4-еуі): 5.","Мода — ең жиі кездесетін сан: 3 (үш рет)."],a:"құлаш 6, медиана 5, мода 3"}),
+"7-2":()=>({q:"3 көйлек пен 2 юбкадан неше түрлі киім жиынтығын құрауға болады?",fig:SVG(400,250,(()=>{let g="";const ys=[50,125,200];ys.forEach((y,i)=>{g+=LN(50,125,150,y,"bl")+BOX(150,y-14,56,28,"К"+(i+1),"b1");[-1,1].forEach((k,j)=>{g+=LN(206,y,290,y+k*22,"bl")+BOX(290,y+k*22-13,76,26,"К"+(i+1)+"+Ю"+(j+1),"b2")})});return g+`<circle cx="50" cy="125" r="6" class="cl"/>`})()),
+ st:["Көйлекті 3 тәсілмен таңдаймыз.","Әр көйлекке юбканы 2 тәсілмен таңдаймыз.","Көбейту ережесі: 3 · 2 = 6."],a:"6 жиынтық"}),
+"8-0":()=>({q:"y = 2x + 3 формуласымен берілген тәуелділікте x = 4 болғанда y неге тең?",fig:SVG(400,90,BOX(10,25,56,38,"x = 4","b1")+LN(66,44,96,44,"ar",' marker-end="url(#ah)"')+BOX(98,25,70,38,"· 2","b2")+LN(168,44,198,44,"ar",' marker-end="url(#ah)"')+BOX(200,25,70,38,"+ 3","b2")+LN(270,44,300,44,"ar",' marker-end="url(#ah)"')+BOX(302,25,80,38,"y = ?","b3")),
+ st:["x-тің орнына 4 қоямыз: y = 2 · 4 + 3.","Алдымен көбейту: 2 · 4 = 8, сосын қосу: 8 + 3 = 11."],a:"y = 11"}),
+"8-1":()=>({q:"Кестедегі заңдылықты тауып, формуласын жаз.",fig:TB(["x",1,2,3,4],["y",5,7,9,11]),
+ st:["x 1-ге артқанда y 2-ге артады, сондықтан формулада 2x бар.","x = 1 болғанда 2 · 1 = 2, ал y = 5, демек 3 қосу керек.","Формула: y = 2x + 3. Тексеру: x = 4 болса, 2 · 4 + 3 = 11 ✓"],a:"y = 2x + 3"}),
+"8-2":()=>({q:"y = 2x − 2 функциясының графигі координаталық остерді қай нүктелерде қияды?",fig:cp(-2,4,-4,4,{lines:[{p:[-1,-4,3,4],c:"bl"}],pts:[{x:0,y:-2,l:"(0; −2)",dy:16},{x:1,y:0,l:"(1; 0)",dx:-54,dy:-10}]}),
+ st:["Oy осімен қиылысу: x = 0, y = 2 · 0 − 2 = −2, нүкте (0; −2).","Ox осімен қиылысу: y = 0, 2x − 2 = 0, x = 1, нүкте (1; 0).","Түзуді екі нүкте арқылы жүргіземіз."],a:"(0; −2) және (1; 0)"}),
+"8-3":()=>({q:"Автомобиль 60 км/сағ жылдамдықпен 3 сағ жүрді. Жүрген жолды тап және графигін сал.",fig:cp(0,4,0,4,{u:44,xl:"t, сағ",yl:"S, км",ly:v=>v*60,lines:[{p:[0,0,3,3],c:"bl"},{p:[3,3,3,0],d:1,c:"rd"},{p:[3,3,0,3],d:1,c:"rd"}],pts:[{x:3,y:3,l:"(3; 180)",c:"r"}]}),
+ st:["Жол = жылдамдық · уақыт: S = v · t.","S = 60 · 3 = 180 км.","Графигі — координаталар басынан шығатын түзу: уақыт артқан сайын жол бірқалыпты артады."],a:"180 км"}),
+"8-4":()=>({q:"y = kx тура пропорционалдығының графигі A(2; 6) нүктесі арқылы өтеді. k-ны және x = 5 болғанда y-ті тап.",fig:cp(-1,6,-1,8,{lines:[{p:[0,0,2.6,7.8]},{p:[2,6,2,0],d:1,c:"rd"}],pts:[{x:2,y:6,l:"A(2; 6)"}]}),
+ st:["k = y : x = 6 : 2 = 3, формуласы y = 3x.","x = 5 болғанда y = 3 · 5 = 15."],a:"k = 3; y = 15"}),
+"9-0":()=>({q:"2x + y = 7 теңдеуінің шешімдерін тап: x = 0, 1, 2, 3 болғанда.",fig:TB(["x",0,1,2,3],["y = 7 − 2x",7,5,3,1]),
+ st:["y-ті өрнектейміз: y = 7 − 2x.","Әр x-ке сәйкес y табамыз: x = 2 болғанда y = 7 − 4 = 3.","Шешім — жұп (x; y): (0; 7), (1; 5), (2; 3), (3; 1). Шексіз көп."],a:"(0; 7), (1; 5), (2; 3), (3; 1)"}),
+"9-1":()=>({q:"2x + y = 4 теңдеуінің графигін сал.",fig:cp(-1,4,-2,5,{lines:[{p:[-0.5,5,3,-2],c:"bl"}],pts:[{x:0,y:4,l:"(0; 4)",dx:8},{x:2,y:0,l:"(2; 0)",dx:12,dy:-10}]}),
+ st:["x = 0 болғанда y = 4, нүкте (0; 4).","y = 0 болғанда 2x = 4, x = 2, нүкте (2; 0).","Екі нүктені түзумен қосамыз. Түзудің әр нүктесі — теңдеудің шешімі."],a:"(0; 4) және (2; 0) нүктелері арқылы өтетін түзу"}),
+"9-2":()=>({q:`Жүйенің шешімін тап: ${SYS("x + y = 5","x − y = 1")}`,fig:cp(-1,6,-1,6,{lines:[{p:[-1,6,6,-1],c:"bl"},{p:[0,-1,6,5],c:"rd"}],pts:[{x:3,y:2,l:"(3; 2)",c:"b",dx:8,dy:-10}],tx:[{x:3.7,y:1.7,t:"x + y = 5","c":"tb tl"},{x:5,y:5.3,t:"x − y = 1","c":"tr"}]}),
+ st:["Жүйенің шешімі — екі теңдеуді де қанағаттандыратын (x; y) жұбы.","Графикпен: екі түзудің қиылысу нүктесі (3; 2).","Тексеру: 3 + 2 = 5 ✓ және 3 − 2 = 1 ✓."],a:"(3; 2)"}),
+"9-3":()=>({q:`Жүйені алмастыру тәсілімен шеш: ${SYS("y = x + 1","2x + y = 7")}`,
+ st:["Бірінші теңдеуде y анық өрнектелген: y = x + 1.","Оны екінші теңдеудегі y-тің орнына қоямыз: 2x + (x + 1) = 7.","Жақшаны ашамыз: 3x + 1 = 7; 3x = 6; x = 2.","x = 2-ні y = x + 1 өрнегіне қоямыз: y = 2 + 1 = 3.","Тексеру: 2 · 2 + 3 = 7 ✓."],a:"(2; 3)"}),
+"9-4":()=>({q:`Жүйені қосу тәсілімен шеш: ${SYS("3x + 2y = 13","5x − 2y = 11")}`,
+ fig:`<p class="cs">1-жағдай: бір айнымалының коэффициенттері қарама-қарсы (+2y және −2y)</p>`+ADD([{t:["","3x","+","2y","=","13"]},{t:["+","5x","−","2y","=","11"]},{c:"sum",t:["","8x","+","0y","=","24"]}]),
+ st:["y-тің коэффициенттері +2 және −2, олар қосқанда нөл береді. Теңдеулерді мүшелеп қосамыз: 8x = 24.","x = 24 : 8 = 3.","x = 3-ті 1-теңдеуге қоямыз: 3 · 3 + 2y = 13; 2y = 4; y = 2.","Тексеру: 5 · 3 − 2 · 2 = 11 ✓."],a:"(3; 2)",
+ more:`<div class="ex2"><p class="cs">2-жағдай: коэффициенттер қарама-қарсы емес, алдымен көбейтеміз</p><p>${SYS("2x + 3y = 12","3x + 2y = 13")}</p>`+ADD([{t:["· 3","6x","+","9y","=","36"]},{t:["· (−2)","−6x","−","4y","=","−26"]},{c:"sum",t:["","0x","+","5y","=","10"]}])+`<div class="stp"><span class="no">1</span><div>x-ті жою үшін: 1-теңдеуді 3-ке, 2-теңдеуді −2-ге көбейтеміз, сонда x-тің коэффициенттері 6 және −6 болады.</div></div><div class="stp"><span class="no">2</span><div>Мүшелеп қосамыз: 5y = 10, y = 2.</div></div><div class="stp"><span class="no">3</span><div>y = 2-ні 1-теңдеуге қоямыз: 2x + 3 · 2 = 12; 2x = 6; x = 3.</div></div><div class="exa">Жауабы: <b>(3; 2)</b></div></div>`})
+};
+const NUM="(−?\\d+(?:,\\d+)?)",nn=t=>parseFloat(String(t).replace("−","-").replace(",","."));
+const win=(vs,pad=2,min=6)=>{let a=Math.floor(Math.min(...vs)-pad),b=Math.ceil(Math.max(...vs)+pad);if(b-a<min){const m=(a+b)/2;a=Math.floor(m-min/2);b=a+min}return[a,b]};
+const nlf=(rows,vs)=>{const[a,b]=win(vs);return SVG(400,rows.length*78,rows.map((r,i)=>(r.t?T(12,i*78+14,r.t,"tl tb"):"")+nl(i*78+(r.t?52:46),a,b,r.o)).join(""))};
+function clipL(m,q,x0,x1,y0,y1){let ax=x0,ay=m*x0+q,bx=x1,by=m*x1+q;if(m){const xl=(y0-q)/m,xh=(y1-q)/m,lo=Math.min(xl,xh),hi=Math.max(xl,xh);ax=Math.max(x0,lo);bx=Math.min(x1,hi);ay=m*ax+q;by=m*bx+q}else if(q<y0||q>y1)return null;return[ax,ay,bx,by]}
+const planeWin=(xs,ys)=>{const[a,b]=win([0,...xs],1,6),[c,d]=win([0,...ys],1,6);return[a,b,c,d]};
+const hbox=(la,lb,lc,hid)=>SVG(400,235,[[50,90,190,90],[190,90,190,180],[190,180,50,180],[50,180,50,90],[110,45,250,45],[250,45,250,135],[50,90,110,45],[190,90,250,45],[190,180,250,135]].map(l=>LN(...l,"bl")).join("")+[[110,135,50,180],[110,135,110,45],[110,135,250,135]].map(l=>LN(...l,"rd",' stroke-dasharray="6 5"')).join("")+T(120,202,la,"tb")+T(36,140,lc,"tb te")+T(232,170,lb,"tb tl")+T(20,226,"штрих — көрінбейтін қырлар","tr tl"));
+const crossF=g=>SVG(400,170,LN(40,140,240,30,"bl")+LN(40,30,240,140,"bl")+T(190,86,g[0],"tr")+T(140,50,g[1],"tb"));
+const parF=(u,v)=>SVG(400,170,LN(20,50,300,50,"bl")+LN(20,120,300,120,"bl")+LN(100,150,200,20,"rd")+T(310,54,"a","tb tl")+T(310,124,"b","tb tl")+T(210,22,"c","tr tl")+T(150,70,u[0],u[1])+T(98,110,v[0],v[1]));
+function qfig(q){try{let m;
+if(m=q.match(new RegExp("^A\\("+NUM+"\\) және B\\("+NUM+"\\)"))){const A=nn(m[1]),B=nn(m[2]);return nlf([{o:{dots:[{v:A,l:"A",c:"r"},{v:B,l:"B",c:"r"}]}}],[A,B])}
+if(m=q.match(new RegExp(NUM+" санына қарама-қарсы"))){const N=nn(m[1]);return nlf([{o:{dots:[{v:N,l:F(N),c:"r"},{v:0,l:"0",c:"b"}]}}],[N,-N])}
+if(m=q.match(new RegExp("Координаталық түзуде "+NUM+" нүктесінен (оңға|солға) (\\d+) бірлік"))){const s=nn(m[1]),k=+m[3]*(m[2]=="оңға"?1:-1);return nlf([{o:{dots:[{v:s,l:F(s),c:"b"}],arr:[{a:s,b:s+k,l:m[2]+" "+m[3]}]}}],[s,s+k])}
+if(m=q.match(new RegExp("^A\\("+NUM+"\\) нүктесі оңға"))){let p=nn(m[1]),vs=[p],r;const re=/(оңға|солға) (\d+) бірлікке/g;while(r=re.exec(q)){p+=(r[1]=="оңға"?1:-1)*+r[2];vs.push(p)}return nlf([{o:{dots:[{v:vs[0],l:"A",c:"b"}]}}],vs)}
+if(m=q.match(/^\|(−?\d+)\| \+ \|(−?\d+)\|/)){const a=nn(m[1]),b=nn(m[2]);return nlf([{o:{dots:[{v:a,l:F(a),c:"r"},{v:b,l:F(b),c:"r"},{v:0,c:"b"}]}}],[a,b,0])}
+{const re=/(^|[ ,])([\[(])(−?\d+); (−?\d+)([\])])/g,L=[];let r;while(r=re.exec(q))L.push(r);
+if(L.length&&L.length<=2&&/аралығ|∩|∪/.test(q)){const vs=[];const rows=L.map(r=>{const a=nn(r[3]),b=nn(r[4]);vs.push(a,b);return{t:L.length>1?`${r[2]}${r[3]}; ${r[4]}${r[5]}`:"",o:{segs:[{a,b,ao:r[2]=="(",bo:r[5]==")"}]}}});return nlf(rows,vs)}}
+if(m=q.match(new RegExp("^"+NUM+" (<|≤) x (<|≤) "+NUM))){const a=nn(m[1]),b=nn(m[4]);return nlf([{o:{segs:[{a,b,ao:m[2]=="<",bo:m[3]=="<"}]}}],[a,b])}
+if(m=q.match(/^(\d+(?:; \d+)+) (сандарының арифметикалық ортасын|қатарының)/)){const v=m[1].split("; ").map(Number),M=Math.max(...v),w=Math.min(44,Math.floor(330/v.length)-8);return SVG(400,170,v.map((x,i)=>{const h=Math.round(x/M*110),X=30+i*(w+8);return `<rect class="b1" x="${X}" y="${140-h}" width="${w}" height="${h}" rx="3"/>`+T(X+w/2,134-h,x,"tb")}).join("")+LN(20,140,385,140))}
+if(m=q.match(/Радиусы (\d+) см шеңбер/))return SVG(400,150,`<circle cx="120" cy="75" r="60" class="pg"/><circle cx="120" cy="75" r="60" class="bl" fill="none"/>`+LN(120,75,180,75,"rd")+`<circle cx="120" cy="75" r="3.5" class="cl"/>`+T(150,67,"r = "+m[1],"tr"));
+if(m=q.match(/сыртқы радиусы (\d+) см, ішкі радиусы (\d+) см/))return SVG(400,150,`<circle cx="120" cy="75" r="62" class="pg"/><circle cx="120" cy="75" r="62" class="bl" fill="none"/><circle cx="120" cy="75" r="30" class="bl" fill="var(--paper)"/>`+LN(120,75,182,75,"rd")+LN(120,75,150,75,"gr")+`<circle cx="120" cy="75" r="3.5" class="cl"/>`+T(166,67,"R = "+m[1],"tr tl")+T(128,98,"r = "+m[2],"tb tl"));
+if(m=q.match(/Кубтың қыры (\d+) см/))return hbox("a = "+m[1]+" см","a","a");
+if(m=q.match(/өлшемдері (\d+) см, (\d+) см, (\d+) см/))return hbox("a = "+m[1]+" см","b = "+m[2]+" см","c = "+m[3]+" см");
+if(m=q.match(/(\d+)° болды/)){const g=+m[1];return g<90?crossF([g+"°","?"]):crossF(["?",g+"°"])}
+if(/Қиылысқан екі түзудің көршілес/.test(q))return crossF(["α","β"]);
+if(m=q.match(/бір жақты бұрыштардың бірі (\d+)°/)){const g=+m[1];return g<90?parF([g+"°","t tb"],["?","t tr"]):parF(["?","t tr"],[g+"°","t tb"])}
+if(/бір жақты бұрыштардың бірі екіншісінен/.test(q)||/бір жақты бұрыштардың айырмасы/.test(q))return parF(["α","t tb"],["β","t tr"]);
+if(m=q.match(/y = (\d+)x ([+−]) (\d+) функциясының графигі/)){const k=+m[1],b=(m[2]=="+"?1:-1)*+m[3],x0=-b/k,[a,B,c,d]=planeWin([x0],[b]),l=clipL(k,b,a,B,c,d);return cp(a,B,c,d,{lines:[{p:l}]})}
+if(m=q.match(/y = (\d+)x − (\d+) функциясының графигі/)){const k=+m[1],b=-m[2],x0=-b/k,[a,B,c,d]=planeWin([x0],[b]),l=clipL(k,b,a,B,c,d);return cp(a,B,c,d,{lines:[{p:l}]})}
+if(m=q.match(/(\d+)x \+ (\d+)y = (\d+) теңдеуінің графигі/)){const a=+m[1],b=+m[2],c=+m[3],X=c/a,Y=c/b,[x0,x1,y0,y1]=planeWin([X],[Y]),l=clipL(-a/b,c/b,x0,x1,y0,y1),tri=/үшбұрыштың/.test(q);return cp(x0,x1,y0,y1,{poly:tri?[[[0,0],[X,0],[0,Y]]]:[],lines:[{p:l}]})}
+{const P=[],re=/([A-Z])\((−?\d+); (−?\d+)\)/g;let r;while(r=re.exec(q))P.push({n:r[1],x:nn(r[2]),y:nn(r[3])});
+if(P.length){const[a,b,c,d]=planeWin(P.map(p=>p.x),P.map(p=>p.y));const o={pts:P.map(p=>({x:p.x,y:p.y,l:p.n+(P.length<3?`(${F(p.x)}; ${F(p.y)})`:""),c:"r",dx:8,dy:-8})),lines:[],poly:[]};
+if(P.length==4&&/төбелері/.test(q)){o.poly=[P.map(p=>[p.x,p.y])];o.pts.forEach(p=>p.l=p.l.split("(")[0])}
+else if(P.length==2&&/вектор/.test(q)){o.lines.push({p:[P[0].x,P[0].y,P[1].x,P[1].y],c:"rd",ar:1});o.pts[0].dy=18}
+else if(P.length==2&&/түзуінің графигі/.test(q)){const A=P[0],B=P[1],k=(B.y-A.y)/(B.x-A.x),l=clipL(k,A.y-k*A.x,a,b,c,d);if(l)o.lines.push({p:l});o.pts[0].dx=-66}
+else if(P.length==1&&/y = kx функциясының графигі/.test(q)){const A=P[0],k=A.y/A.x,l=clipL(k,0,a,b,c,d);if(l)o.lines.push({p:l})}
+else if(P.length==2&&/нүктелерінің арақашықтығын/.test(q))o.lines.push({p:[P[0].x,P[0].y,P[1].x,P[1].y],c:"rd",d:1});
+return cp(a,b,c,d,o)}}
+if(!/сосын|жартысын/.test(q)&&(m=q.match(/(\d+) км\/сағ жылдамдықпен (\d+) сағ/)))return SVG(400,100,LN(30,50,370,50,"ar",' marker-end="url(#ah)"')+T(200,36,"v = "+m[1]+" км/сағ","tb")+T(200,72,"t = "+m[2]+" сағ","tb")+T(200,92,"S = ?","tr")+`<circle cx="30" cy="50" r="4" class="cl"/>`);
+}catch(e){}return ""}
+const strip=t=>String(t).replace(/^\((.*)\)$/,"$1");
+const FR=(a,b)=>`<span class="fr"><i>${strip(a)}</i><i>${strip(b)}</i></span>`;
+const T4="(\\(.+?\\)|\\S+)";
+const fq4=q=>String(q).replace(new RegExp(T4+" : "+T4+" = "+T4+" : "+T4+"(?= пропорциясынан)"),(m,a,b,c,d)=>FR(a,b)+" = "+FR(c,d));
+const PRL=q=>{let m;
+if(m=q.match(new RegExp("^"+T4+" : "+T4+" = "+T4+" : "+T4+" пропорциясынан")))return FR(m[1],m[2])+" = "+FR(m[3],m[4]);
+if(m=q.match(/(\d+) кг алма (\d+) теңге тұрады\. (\d+) кг/))return FR(m[1],m[3])+" = "+FR(m[2],"x");
+if(m=q.match(/(\d+) жұмысшы жұмысты (\d+) күнде орындайды\. (\d+) жұмысшы/))return FR(m[1],m[3])+" = "+FR("x",m[2]);
+if(m=q.match(/Масштаб 1 : (\d+)\. Картада (\d+) см/))return FR(1,m[1])+" = "+FR(m[2],"x");
+return ""};
+const fracH=h=>h.replace(/^(\S+) — (\S+), (\S+) — (\S+?)(?=;|$)/,(m,a,p,b,r)=>"Пропорция: "+FR(a,b)+" = "+FR(p,r));
+const hintH=(q,h)=>{const pl=PRL(q);return (pl?"Пропорция: "+pl+". ":"")+fracH(esc(h))};
+const exHTML=o=>`<div class="exq"><span class="tag">Үлгі есеп</span>${o.q}</div>${o.fig||""}<div class="exst">${o.st.map((t,i)=>`<div class="stp"><span class="no">${i+1}</span><div>${t}</div></div>`).join("")}</div><div class="exa">Жауабы: <b>${o.a}</b></div>${o.more||""}`;
+const autoEx=()=>{const e=G(),pl=PRL(e[0]),st=e[3].split(/;\s*/).filter(Boolean).map(fracH);if(pl&&!/пропорциясынан/.test(e[0]))st.unshift("Пропорция құрамыз: "+pl+".");else if(pl)st.unshift("Пропорцияны бөлшек түрінде жазамыз: "+pl+".");return{q:fq4(e[0]),st,a:fm(e[1],e[2])}};
+let curFix=[],nextAct=null;
+const esc=t=>String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const key=()=>c+"-"+s;
+const fresh=()=>({l:0,ph:0,t:[],r:[],done:0});
+const st=()=>W[key()]||(W[key()]=fresh());
+const att=S=>LOG.find(e=>e.t===S.t[S.l]);
+const nm=()=>$("name").value.trim(),today=()=>new Date().toLocaleDateString("ru-RU");
+function stepper(S){$("lv").innerHTML="";LV.forEach((v,i)=>{const b=document.createElement("button"),dn=S.done||i<S.l;b.type="button";b.disabled=true;b.textContent=(dn?"✓ ":"")+v;b.setAttribute("aria-pressed",!S.done&&i===S.l);if(dn)b.className="dn";$("lv").appendChild(b)})}
+function nextBtn(t,f){const b=$("gofix");b.textContent=t;b.hidden=false;nextAct=f}
+const nextLabel=()=>st().l<2?LV[st().l+1]+" деңгейге өту →":"Аяқтау және мұғалімге жіберу";
+function advance(){const S=st();S.l++;S.ph=0;if(S.l>2){finish();return}sv();load()}
+function finish(){const S=st();S.done=1;S.l=2;S.ph=0;LV.forEach((v,i)=>{const r=S.r[i]||{s:0,n:5,w:5,f:0};P[key()+"-"+i]={s:r.s,n:r.n,w:r.w,f:r.f,d:today(),m:"Деңгейлік жұмыс"}});
+LOG.forEach(e=>{if(S.t.includes(e.t))delete e.w});sv();load();push()}
+function renderDone(S){const rs=LV.map((v,i)=>{const r=S.r[i]||{s:0,n:5,w:5,f:0};return `<li>${v}: ${r.s}/${r.n}, қате: ${r.w}, түзетті: ${r.f}</li>`}).join("");
+$("title").textContent=C[c].s[s][0]+" · бөлім аяқталды";
+$("exb").innerHTML=`<ul style="margin:6px 0 6px 18px;padding:0">${rs}</ul>`;
+$("quiz").innerHTML="";$("check").hidden=true;$("renew").hidden=false;$("info").textContent="";
+$("certText").textContent=`${nm()}, сен «${C[c].s[s][0]}» бөлімінің үш деңгейін де аяқтадың. Күні: ${today()}.`;
+$("share").value=msg();$("wa").href="https://wa.me/?text="+encodeURIComponent(msg());$("cert").hidden=false;map()}
+function renderFix(S){const a=att(S);curFix=(a?a.i:[]).filter(q=>!Array.isArray(q)&&!q.o);
+$("title").textContent=C[c].s[s][0]+" · "+LV[l]+" деңгей · Қатемен жұмыс";
+$("exb").innerHTML=`<p style="margin:6px 0">Мына есептерде қателестің. Әр есепті қайта шығарып, дұрыс жауабын жаз. Тексергеннен кейін шешу жолы көрсетіледі. Одан кейін келесі деңгейге өтесің.</p>`;
+$("quiz").innerHTML=curFix.map((z,i)=>`<fieldset><legend>${i+1}. ${fq4(z.q)}</legend>${qfig(z.q)}<p style="margin:0 0 6px">Бұрынғы жауабың: <b>${esc(z.g)}</b> — қате</p><input type="text" class="ans" inputmode="decimal" autocomplete="off" aria-label="Дұрыс жауап" placeholder="Дұрыс жауап"><p class="hint" hidden></p></fieldset>`).join("");
+$("check").hidden=!curFix.length;$("info").textContent="";if(!curFix.length)nextBtn(nextLabel(),advance);map()}
+function checkFix(){const fs=[...$("quiz").querySelectorAll("fieldset")];
+if(fs.some(f=>!f.querySelector(".ans").value.trim())){$("info").textContent="Әр есептің дұрыс жауабын жаз.";return}
+const S=st();let n=0;fs.forEach((f,i)=>{const z=curFix[i],ok=same(f.querySelector(".ans").value,num(z.c));
+if(ok){n++;z.f=1}
+f.querySelectorAll("input").forEach(x=>x.disabled=true);
+const h=f.querySelector(".hint");h.className="hint"+(ok?" okh":"");h.innerHTML=(ok?"Дұрыс! Қатеңді түзеттің. ":"Әлі қате. ")+(z.h?"Шешу жолы: "+hintH(z.q,z.h)+". ":"")+"Дұрыс жауабы: "+esc(z.c);h.hidden=false});
+if(S.r[l])S.r[l].f=n;
+$("check").hidden=true;$("info").textContent=`Түзетілді: ${n} / ${fs.length}`;sv();nextBtn(nextLabel(),advance)}
+function load(){
+$("ch").innerHTML=C.map((x,i)=>`<option value="${i}"${i===c?" selected":""}>${x.n}</option>`).join("");
+$("sec").innerHTML=C[c].s.map((x,i)=>`<option value="${i}"${i===s?" selected":""}>${x[0]}</option>`).join("");
+const S=st();l=Math.min(S.l,2);md=S.ph;stepper(S);
+$("gofix").hidden=true;$("renew").hidden=true;$("cert").hidden=true;
+if(S.done){renderDone(S);return}
+if(S.ph==1){renderFix(S);return}
+$("title").textContent=C[c].s[s][0]+" · "+LV[l]+" деңгей";
+$("exb").innerHTML=exHTML(EX[key()]?EX[key()]():autoEx());
+cur=gen();
+$("quiz").innerHTML=cur.map((k,i)=>{const inp=`<input type="text" class="ans" inputmode="decimal" autocomplete="off" aria-label="Жауап"><span>${k.u}</span>`;
+const body=i<3?k.o.map((o,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join(""):`<p class="sub">Жауабын өзің жаз:</p>`+inp;
+return `<fieldset><legend>${i+1}. ${fq4(k.q)}</legend>${qfig(k.q)}${body}<p class="hint" hidden></p></fieldset>`}).join("");
+$("check").hidden=false;$("info").textContent="";map()}
+$("ch").onchange=e=>{c=+e.target.value;s=0;load()};
+$("sec").onchange=e=>{s=+e.target.value;load()};
+$("renew").onclick=()=>{W[key()]=fresh();sv();load()};
+$("gofix").onclick=()=>{if(nextAct)nextAct()};
+function msg(){const L=[];C[c].s.forEach((x,i)=>LV.forEach((v,j)=>{const p=P[c+"-"+i+"-"+j];if(p)L.push(`• ${x[0]} — ${v} (${p.s}/${p.n||3}${p.w!=null?", қате: "+p.w+", түзетті: "+p.f:""}, ${p.d})`)}));
+return `Сәлеметсіз бе! Мен, ${nm()}, 6-сынып математикасынан «${C[c].n}» бойынша мына деңгейлерді орындадым:\n${L.join("\n")}`}
+function push(){const say=t=>{$("sent").textContent=t;if($("cert").hidden)$("info").textContent+=" · "+t};const A=LOG.filter(e=>!e.w);
+try{$("code").value=btoa(unescape(encodeURIComponent(JSON.stringify({n:nm(),p:P,a:A.slice(-30)}))))}catch(e){}
+if(!DB||!UID){say("Мұғалімнің кестесіне жіберілмеді (кіру немесе рұқсат жоқ). «Мұғалімге код» арқылы жібер.");return}
+try{DB.doc("results/"+UID).set({n:nm(),className:(students().find(x=>x.id===UID)||{}).className||"",p:P,a:A.slice(-60).map(e=>Object.assign({},e,{i:(e.i||[]).map(q=>{if(Array.isArray(q))return q;const r=Object.assign({},q);delete r.h;return r})})),t:Date.now()}).then(()=>say("Барлық әрекетің мұғалімнің кестесіне жіберілді.")).catch(e=>say("Жіберу мүмкін болмады ("+(e&&e.code||"қате")+"). «Мұғалімге код» арқылы жібер."))}catch(e){say("Жіберу мүмкін болмады ("+e.message+"). «Мұғалімге код» арқылы жібер.")}}
+$("cc").onclick=()=>{const t=$("code");t.select();try{document.execCommand("copy")}catch(e){}try{navigator.clipboard.writeText(t.value)}catch(e){}};
+$("check").onclick=()=>{
+if(md==1)return checkFix();
+if(!nm()){$("info").textContent="Алдымен аты-жөніңді жаз.";$("name").focus();return}
+const fs=[...$("quiz").querySelectorAll("fieldset")];
+const an=fs.map(f=>({r:f.querySelector("input[type=radio]:checked"),t:(f.querySelector(".ans")||{}).value||""}));
+const miss=an.some((x,i)=>i<3?!x.r:!x.t.trim());
+if(miss){$("info").textContent="Барлық 5 есепке жауап бер: алғашқы 3-еуінде нұсқа таңда, соңғы 2-еуінің жауабын жаз.";return}
+let sc=0;const IT=[];
+fs.forEach((f,i)=>{const k=cur[i],x=an[i];let ok;
+ok=i<3?k.o[+x.r.value]===k.a:same(x.t,k.v);
+if(ok)sc++;IT.push({q:k.q,g:i<3?k.o[+x.r.value]:x.t.trim(),c:k.a,h:k.h,o:ok?1:0});
+f.querySelectorAll("input").forEach(z=>z.disabled=true);
+if(i<3)f.querySelectorAll(".opt").forEach((o,j)=>{if(k.o[j]===k.a)o.classList.add("ok");else if(o.contains(x.r))o.classList.add("no")});
+const h=f.querySelector(".hint");h.className="hint"+(ok?" okh":"");h.innerHTML=(ok?"Дұрыс! Шешу жолы: ":"Дұрыс шешуі: ")+hintH(k.q,k.h)+". Жауабы: "+esc(k.a);h.hidden=false});
+const N=cur.length,S=st(),t=Date.now();
+LOG.push({t,k:key()+"-"+l,m:MD[0],s:sc,n:N,d:today(),i:IT,w:1});LOG=LOG.slice(-150);
+S.t[l]=t;S.r[l]={s:sc,n:N,w:N-sc,f:0};if(sc<N)S.ph=1;sv();
+$("check").hidden=true;$("info").textContent=`Нәтиже: ${sc} / ${N}`+(sc<N?" · Енді осы деңгейдегі қателермен жұмыс жасайсың.":" · Қатесіз!");
+if(sc<N)nextBtn("Қатемен жұмыс жасау →",load);else nextBtn(nextLabel(),advance)};
+$("copy").onclick=()=>{const t=$("share");t.select();let ok=false;try{ok=document.execCommand("copy")}catch(e){}try{navigator.clipboard.writeText(t.value);ok=true}catch(e){}$("info").textContent=ok?"Мәтін көшірілді.":"Мәтінді қолмен белгілеп көшір."};
+$("name").addEventListener("change",()=>{UID=localId(nm());localStorage.setItem("math6-last-name",nm());const d=JSON.parse(localStorage.getItem("math6-progress-"+UID)||"null");P=d?.P||{};W=d?.W||{};LOG=d?.LOG||[];sv();load()});
+function map(){$("mt").textContent="Менің нәтижелерім: "+C[c].n;
+$("map").innerHTML="<tr><th>Бөлім</th>"+LV.map(v=>`<th>${v}</th>`).join("")+"</tr>"+C[c].s.map((x,i)=>`<tr><td>${x[0]}</td>`+LV.map((v,j)=>{const p=P[c+"-"+i+"-"+j];return p?`<td class="yes">${p.s}/${p.n||3}${p.w?`<br><span class="sub">қате ${p.w}, түзетті ${p.f}</span>`:""}</td>`:"<td>—</td>"}).join("")+"</tr>").join("")}
+let TD=[],TSEL=null,tready=false;
+function tab(t){$("stu").hidden=!!t;$("tch").hidden=!t;document.querySelector("main").classList.toggle("wide",!!t);$("ts").setAttribute("aria-pressed",!t);$("tt").setAttribute("aria-pressed",!!t);
+if(t&&DB){tsub=true;DB.collection("results").onSnapshot(sn=>tr(sn.docs),e=>{$("tinfo").textContent="Нәтижелерді оқу мүмкін болмады ("+(e&&e.code)+")"})}}
+$("ts").onclick=()=>tab(0);$("tt").onclick=()=>tab(1);
+const rom=i=>C[i].n.split(" ")[0];
+const secLab=(c,i)=>{const t=C[c].s[i][0].split(" ")[0],d=C[c].s.filter((x,j)=>j<i&&x[0].split(" ")[0]===t).length;return t+(d?"·"+(d+1):"")};
+const rt=r=>r?r.s/(r.n||3):null,gc=r=>r==null?"":r>=.8?"g":r>=.6?"y":"r",pc=r=>Math.round(r*100)+"%";
+const kp=k=>k.split("-").map(Number);
+const inSc=(k,ch,sx)=>{const[a,b]=kp(k);return C[a]&&C[a].s[b]&&(ch<0||a==ch)&&(sx<0||b==sx)};
+const stat=(r,ch,sx)=>{const p=r.p||{};let sm=0,n=0,w=0,f=0;Object.keys(p).forEach(k=>{if(!inSc(k,ch,sx))return;sm+=rt(p[k]);n++;w+=p[k].w||0;f+=p[k].f||0});return{avg:n?sm/n:null,n,w,f}};
+async function tr(docs){let ps={};try{if(TU)ps=await TU.profiles(docs.map(d=>d.id))||{}}catch(e){}
+TD=docs.map(d=>{const r=Object.assign({id:d.id},d.data()||{});r.n=(ps[d.id]&&ps[d.id].name)||r.n||"Аты жоқ";if(r.className)r.n+=" · "+r.className;return r});
+if(!tready){tready=true;$("tc").innerHTML='<option value="-1">Барлық тараулар</option>'+C.map((x,i)=>`<option value="${i}">${esc(x.n.length>60?x.n.slice(0,58)+"…":x.n)}</option>`).join("");fillSx();
+$("tc").onchange=()=>{fillSx();trender()};$("tsx").onchange=trender;$("tq").oninput=trender;$("tso").onchange=trender;$("tcopy").onclick=tcopy}
+trender()}
+function fillSx(){const c=+$("tc").value;$("tsx").innerHTML='<option value="-1">Барлық бөлімдер</option>'+(c<0?"":C[c].s.map((x,i)=>`<option value="${i}">${esc(x[0].length>55?x[0].slice(0,53)+"…":x[0])}</option>`).join(""));$("tsx").disabled=c<0}
+let TT={head:[],rows:[]};
+function trender(){const ch=+$("tc").value,sx=+$("tsx").value,q=$("tq").value.trim().toLowerCase();
+let L=TD.filter(r=>!q||r.n.toLowerCase().includes(q)).map(r=>({r,st:stat(r,ch,sx)}));
+if($("tso").value=="a")L.sort((x,y)=>(x.st.avg==null)-(y.st.avg==null)||(x.st.avg??2)-(y.st.avg??2));else L.sort((x,y)=>x.r.n.localeCompare(y.r.n,"kk"));
+const done=L.filter(x=>x.st.n),all=done.reduce((a,x)=>a+x.st.avg,0);
+$("tinfo").textContent=TD.length?`Жауап жіберген оқушылар: ${TD.length}`+(q?`, табылғаны: ${L.length}`:""):"Әзірге жауап жоқ. Оқушы алғашқы тапсырмасын тексергеннен кейін нәтижесі осында көрінеді.";
+$("tstat").innerHTML=TD.length?[[done.length+" / "+L.length,"оқушы осы бөлікте нәтиже берді"],[done.length?pc(all/done.length):"—","орташа балл"],[done.filter(x=>x.st.avg<.6).length,"көмек керек (орташа 60%-дан төмен)"],[done.reduce((a,x)=>a+x.st.f,0)+" / "+done.reduce((a,x)=>a+x.st.w,0),"қате түзетілді / барлық қате"]].map(x=>`<div class="sc"><b>${x[0]}</b><span>${x[1]}</span></div>`).join(""):"";
+const head=[],rows=[];
+if(ch<0){head.push({t:"Оқушы"},{t:"Аяқталған деңгей"});C.forEach((x,i)=>head.push({t:rom(i),title:x.n}));head.push({t:"Орташа %"},{t:"Түзетті"});
+L.forEach(({r,st})=>{const p=r.p||{},cells=[{t:Object.keys(p).filter(k=>inSc(k,-1,-1)).length}];
+C.forEach((x,i)=>{let d3=0,sn=0;x.s.forEach((y,j)=>{const n=[0,1,2].filter(l=>p[i+"-"+j+"-"+l]).length;if(n)sn++;if(n==3)d3++});cells.push({t:sn?d3+"/"+x.s.length:"",c:d3==x.s.length?"g":d3?"y":sn?"r":"",title:sn+" бөлім басталған, "+d3+" аяқталған",go:i})});
+cells.push({t:st.avg==null?"":pc(st.avg),c:gc(st.avg)},{t:st.w?st.f+"/"+st.w:""});rows.push({id:r.id,n:r.n,cells})})}
+else if(sx<0){head.push({t:"Оқушы"});C[ch].s.forEach((y,j)=>head.push({t:secLab(ch,j),title:y[0],go:j}));head.push({t:"Орташа %"});
+L.forEach(({r,st})=>{const p=r.p||{},cells=[];C[ch].s.forEach((y,j)=>{const ls=[0,1,2].map(l=>p[ch+"-"+j+"-"+l]);cells.push({t:ls.map(z=>z?z.s+"/"+(z.n||3):"—").join(" | "),html:ls.map((z,l)=>`<span class="lv ${z?gc(rt(z)):""}" title="${LV[l]}: ${z?z.s+"/"+(z.n||3):"әлі орындамаған"}">${"БОЖ"[l]}</span>`).join(""),title:y[0],go:j})});
+cells.push({t:st.avg==null?"":pc(st.avg),c:gc(st.avg)});rows.push({id:r.id,n:r.n,cells})})}
+else{head.push({t:"Оқушы"},{t:"Базалық"},{t:"Орта"},{t:"Жоғары"},{t:"Қате → түзетті"},{t:"Күні"});
+L.forEach(({r})=>{const p=r.p||{},ls=[0,1,2].map(l=>p[ch+"-"+sx+"-"+l]),cells=ls.map(z=>({t:z?z.s+"/"+(z.n||3):"",c:z?gc(rt(z)):"",title:z?pc(rt(z)):""}));
+const w=ls.reduce((a,z)=>a+(z?z.w||0:0),0),f=ls.reduce((a,z)=>a+(z?z.f||0:0),0),dt=ls.filter(Boolean).map(z=>z.d).pop()||"";
+cells.push({t:ls.some(Boolean)?w+" → "+f:""},{t:dt});rows.push({id:r.id,n:r.n,cells})})}
+TT={head,rows};
+$("rt").innerHTML="<thead><tr>"+head.map(h=>`<th${h.title?` title="${esc(h.title)}"`:""}>${esc(h.t)}</th>`).join("")+"</tr></thead><tbody>"+rows.map(r=>`<tr${r.id===TSEL?' class="sel"':""}><td><button type="button" data-id="${esc(r.id)}">${esc(r.n)}</button></td>`+r.cells.map(c=>`<td class="${c.c||""}${c.go!=null?" cl":""}"${c.title?` title="${esc(c.title)}"`:""}${c.go!=null?` data-go="${c.go}"`:""}>${c.html||esc(c.t)}</td>`).join("")+"</tr>").join("")+"</tbody>";
+$("rt").querySelectorAll("button[data-id]").forEach(b=>b.onclick=()=>{TSEL=b.dataset.id;trender();$("tdet").scrollIntoView({behavior:"smooth",block:"nearest"})});
+$("rt").querySelectorAll("td[data-go]").forEach(td=>td.onclick=()=>{const g=+td.dataset.go;if(ch<0){$("tc").value=g;fillSx()}else{$("tsx").value=g}trender()});
+hardest(ch,sx);details(ch,sx)}
+function hardest(ch,sx){const H=$("hard");if(sx>=0||!TD.length){H.innerHTML="";return}
+const m={};TD.forEach(r=>Object.keys(r.p||{}).forEach(k=>{if(!inSc(k,ch,-1))return;const[a,b]=kp(k);(m[a+"-"+b]=m[a+"-"+b]||[]).push(rt(r.p[k]))}));
+const A=Object.keys(m).map(k=>{const[a,b]=kp(k),v=m[k];return{k,t:C[a].s[b][0],avg:v.reduce((x,y)=>x+y,0)/v.length,n:v.length}}).sort((x,y)=>x.avg-y.avg).slice(0,5);
+H.innerHTML=A.length?`<h3>Ең қиын болған бөлімдер</h3><div class="hl">${A.map(x=>`<span><b>${pc(x.avg)}</b> — ${esc(x.t.length>50?x.t.slice(0,48)+"…":x.t)} (${x.n})</span>`).join("")}</div>`:""}
+function details(ch,sx){const D=$("tdet"),r=TD.find(x=>x.id===TSEL);if(!r){D.innerHTML="";return}
+const at=(r.a||[]).filter(z=>inSc(z.k,ch,sx)).slice().reverse();
+D.innerHTML=`<h3>${esc(r.n)} — жауаптары</h3><button type="button" id="dclose">Жабу</button>`+(at.length?at.map((z,i)=>{const[a,b,e]=kp(z.k),ok=rt(z);return `<details${i==0?" open":""}><summary class="${gc(ok)=="r"?"r":"g"}">${esc(C[a].s[b][0])} — ${LV[e]}: ${z.s}/${z.n||3} (${esc(z.d||"")})</summary><table class="dt"><tr><th>№</th><th>Есеп</th><th>Оқушы жауабы</th><th>Дұрыс жауап</th><th></th></tr>${(z.i||[]).map((q,j)=>{if(Array.isArray(q))q={q:q[0],g:q[1],c:q[2],o:q[3]};return `<tr><td>${j+1}</td><td>${esc(q.q)}</td><td>${esc(q.g)}</td><td>${esc(q.c)}</td><td class="${q.o?"dg":"dr"}">${q.o?"✓":"✗"}${q.f?" түзетті":""}</td></tr>`}).join("")}</table></details>`}).join(""):'<p class="sub">Таңдалған бөлікте әрекет жоқ.</p>');
+$("dclose").onclick=()=>{TSEL=null;trender()}}
+function tcopy(){const t=[TT.head.map(h=>h.t),...TT.rows.map(r=>[r.n,...r.cells.map(c=>c.t)])].map(r=>r.join("\t")).join("\n");
+const ta=document.createElement("textarea");ta.value=t;ta.style.cssText="position:fixed;opacity:0";document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand("copy")}catch(e){}try{navigator.clipboard.writeText(t)}catch(e){}document.body.removeChild(ta);$("tinfo").textContent=ok?"Кесте көшірілді, Excel немесе Google Sheets-ке қоюға болады (Ctrl+V).":"Көшіру мүмкін болмады."}
+function localId(name){return encodeURIComponent(name.trim().toLocaleLowerCase("kk")).replace(/%/g,"_").slice(0,100)||"guest"}
+async function initDb(){
+  UID=localId(localStorage.getItem("math6-last-name")||""); DB={
+    doc(path){return {get:async()=>{const d=JSON.parse(localStorage.getItem("math6-progress-"+UID)||"null");return {exists:!!d,data:()=>d}},set:async data=>{const key=path.startsWith("results/")?"math6-result-"+path.slice(8):"math6-progress-"+UID;localStorage.setItem(key,JSON.stringify(data));}}},
+    collection(){return {onSnapshot(callback){const docs=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith("math6-result-")){const id=k.slice(13),data=JSON.parse(localStorage.getItem(k)||"{}");docs.push({id,data:()=>data})}}callback({docs})}}}
+  };
+  ready=true;
+  const saved=JSON.parse(localStorage.getItem("math6-progress-"+UID)||"null");if(saved){P=saved.P||{};W=saved.W||{};LOG=saved.LOG||[];if(saved.n){$("name").value=saved.n;UID=localId(saved.n);localStorage.setItem("math6-last-name",saved.n)}}
+  $("dbs").textContent="Осы браузерде сақталады. Басқа құрылғыға автоматты көшпейді.";
+  load();map();
+}
+load();initDb();
+const students=()=>JSON.parse(localStorage.getItem("math6-students")||"[]");
+function showAuth(){const teacher=JSON.parse(localStorage.getItem("math6-teacher")||"null");$("setupTeacher").hidden=!!teacher;$("signIn").hidden=!teacher;$("authMsg").textContent=""}
+function roster(){const a=students();$("roster").innerHTML=a.length?"<h3>Тіркелген оқушылар</h3><ul>"+a.map(x=>`<li>${esc(x.name)} — ${esc(x.className)} · логин: <b>${esc(x.login)}</b></li>`).join("")+"</ul>":"<p class='sub'>Оқушы әлі тіркелмеген.</p>"}
+function enter(user,isTeacher){UID=user.id;$("name").value=user.name||"Мұғалім";$("name").readOnly=!isTeacher;P={};W={};LOG=[];const d=JSON.parse(localStorage.getItem("math6-progress-"+UID)||"null");if(d){P=d.P||{};W=d.W||{};LOG=d.LOG||[]}document.body.classList.add("authed");$("gate").hidden=true;$("tt").hidden=!isTeacher;$("ts").hidden=isTeacher;if(isTeacher){roster();tab(1)}else tab(0);load();map();sv();}
+$("createTeacher").onclick=()=>{const login=$("newTeacherLogin").value.trim(),password=$("newTeacherPass").value;if(login.length<3||password.length<6){$("authMsg").textContent="Логин кемінде 3, құпиясөз кемінде 6 таңба болсын.";return}localStorage.setItem("math6-teacher",JSON.stringify({login,password,id:"teacher",name:"Мұғалім"}));showAuth();$("authMsg").textContent="Аккаунт жасалды. Енді кіріңіз."};
+$("signInBtn").onclick=()=>{const login=$("loginName").value.trim(),password=$("loginPass").value;if($("loginRole").value==="teacher"){const t=JSON.parse(localStorage.getItem("math6-teacher")||"null");if(t&&t.login===login&&t.password===password){enter(t,true);return}}else{const s=students().find(x=>x.login===login&&x.password===password);if(s){enter(s,false);return}}$("authMsg").textContent="Логин немесе құпиясөз қате."};
+$("registerStudent").onclick=()=>{const name=$("studentFullName").value.trim(),className=$("studentClass").value.trim(),login=$("studentLogin").value.trim(),password=$("studentPass").value;if(!name||!className||!login||password.length<4){$("rosterMsg").textContent="Барлық жолды толтырыңыз. Құпиясөз кемінде 4 таңба болсын.";return}const a=students();if(a.some(x=>x.login.toLowerCase()===login.toLowerCase())){$("rosterMsg").textContent="Бұл логин тіркелген. Басқа логин таңдаңыз.";return}a.push({id:"student-"+Date.now().toString(36)+Math.random().toString(36).slice(2,7),name,className,login,password});localStorage.setItem("math6-students",JSON.stringify(a));$("studentFullName").value=$("studentClass").value=$("studentLogin").value=$("studentPass").value="";$("rosterMsg").textContent="Оқушы тіркелді. Логині мен бастапқы құпиясөзін беріңіз.";roster()};
+$("logout").onclick=()=>{document.body.classList.remove("authed");$("gate").hidden=false;$("loginPass").value="";$("authMsg").textContent="";showAuth()};
+showAuth();
+</script>
+</body>
+</html>
